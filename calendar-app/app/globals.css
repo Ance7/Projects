@@ -1,0 +1,25 @@
+:root {
+  --background-dark-mode: #333333;
+  --secondary-color: #D5CCC7;
+  --gray: #A9A29C;
+  --dark: #28262B;
+  --tan-color: #B68D40;
+  --cream-color: #F4EBD0;
+  --charcoal-color: #122620;
+  --gold-color: #D6AD60;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  max-width: 100vw;
+  overflow-x: hidden;
+  background-color: var(--background-dark-mode);
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
