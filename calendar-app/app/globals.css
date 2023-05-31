@@ -23,3 +23,76 @@ body {
   margin: 0;
   padding: 0;
 }
+
+.btn-create-task {
+  background-color: var(--gray);
+  width: 7rem;
+  height: 2rem;
+  border-radius: 10px;
+  border: none;
+  color: #ffffff;
+  font-weight: bold;
+}
+
+header {
+  display: flex;
+  flex-direction: row;
+  width: 100vw;
+  justify-content: space-between;
+  padding: 2rem 2rem;
+}
+
+.info-date {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.info-date p {
+  color: #ffffff;
+  font-size: 1.5rem;
+}
+
+.info-date span {
+  color: #ffffff85;
+  
+}
+
+.calendar-options {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.calendar-options input {
+  width: 11rem;
+  height: 2rem;
+  background-color: var(--gray);
+  border-radius: 10px;
+  border: none;
+}
+
+.calendar-options input::placeholder {
+  color: #ffffffd7;
+  padding: 0 0.7rem;
+}
+
+.options {
+  display: flex;
+  margin-top: 0.5rem;
+  gap: 0.4rem;
+}
+
+.options div {
+  background-color: var(--gray);
+  border-radius: 10px;
+  width: 4rem;
+  font-size: 0.9rem;
+  text-align: center;
+  color: white;
+}
+
+.options div.active {
+  background-color: var(--gold-color);
+}
+
