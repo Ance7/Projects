@@ -90,6 +90,7 @@ header {
   font-size: 0.9rem;
   text-align: center;
   color: white;
+  cursor: pointer;
 }
 
 .options div.active {

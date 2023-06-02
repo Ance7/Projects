@@ -2,19 +2,13 @@
 import './globals.css'
 import { rubik } from './fonts'
 import ComponenteH from '@/components/header'
-
-export const metadata = {
-  title: 'Calendar App',
-  description: 'Calendar App whit Next.js',
-}
+import dynamic from 'next/dynamic'
+import { CalendarComponent } from '@/components/calendar'
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={rubik.className}>
-
-        <ComponenteH />
-
         <main>
           <div className='calendar-info'>
             <div className='mini-calendar'>
@@ -30,6 +24,8 @@ export default function RootLayout({ children }) {
 
             </div>
           </div>
+
+          <CalendarComponent />
 
           {children}
         </main>

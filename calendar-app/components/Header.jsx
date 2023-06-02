@@ -1,4 +1,5 @@
 import React from 'react'
+import { actualDay, actualMonth, actualYear } from '@/components/calendar'
 
 function ComponenteH() {
   return (
@@ -8,8 +9,8 @@ function ComponenteH() {
       </button>
 
       <div className='info-date'>
-        <p>June</p>
-        <span>2023</span>
+        <p>{actualMonth}</p>
+        <span>{actualYear}</span>
       </div>
 
       <div className='calendar-options'>
