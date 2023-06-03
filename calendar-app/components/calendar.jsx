@@ -17,7 +17,13 @@ let today = new Date()
 let activeDay
 let month = today.getMonth()
 let year = today.getFullYear()
+let date
 
+const eventsArray = []
+
+function initCalendar() {
+  
+}
 
 export const CalendarComponent = () => {
   
