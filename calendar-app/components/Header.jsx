@@ -1,7 +1,7 @@
 import React from 'react'
 import { actualDay, actualMonth, actualYear } from '@/components/calendar'
 
-function ComponenteH() {
+function HeaderComponent() {
   return (
     <header>
       <button className='btn-create-task'>
@@ -26,4 +26,4 @@ function ComponenteH() {
   )
 }
 
-export default ComponenteH
+export default HeaderComponent

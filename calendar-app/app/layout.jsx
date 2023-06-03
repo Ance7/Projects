@@ -4,11 +4,15 @@ import { rubik } from './fonts'
 import ComponenteH from '@/components/header'
 import dynamic from 'next/dynamic'
 import { CalendarComponent } from '@/components/calendar'
+import HeaderComponent from '@/components/header'
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={rubik.className}>
+
+        <HeaderComponent />
+
         <main>
           <div className='calendar-info'>
             <div className='mini-calendar'>
