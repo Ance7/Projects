@@ -97,3 +97,7 @@ header {
   background-color: var(--gold-color);
 }
 
+td, th {
+  border: 1px var(--charcoal-color) solid;
+}
+

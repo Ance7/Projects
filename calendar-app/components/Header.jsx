@@ -16,7 +16,7 @@ function HeaderComponent() {
       <div className='calendar-options'>
         <input type='search' placeholder='Buscar Tarea' name='search'  />
         <div className='options'>
-          <div>Today</div>
+          <div>Hoy</div>
           <div className='active'>Semana</div>
           <div>Mes</div>
           <div>Año</div>
