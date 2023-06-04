@@ -2,25 +2,10 @@
 
 import { useState } from "react"
 
+import { arrowLeft, arrowRight } from "@/app/icons"
 import styles from '../app/globals.css'
-import { el } from "date-fns/locale"
 
 export const CalendarComponent = () => {
-  const months = [
-    'January',
-    'February',
-    'March',
-    'April',
-    'May',
-    'June',
-    'July',
-    'August',
-    'September',
-    'October',
-    'November',
-    'December'
-  ]
-
   const [date, setDate] = useState(new Date())
 
   function handlePrevMonth() {
@@ -56,7 +41,7 @@ export const CalendarComponent = () => {
       if (i % 7 === 0) {
         rows.push(
         <tr key={i}>
-          <td>{calendar[i]}</td>
+          <td style={{color: '#bd0000'}}>{calendar[i]}</td>
           <td>{calendar[i + 1]}</td>
           <td>{calendar[i + 2]}</td> 
           <td>{calendar[i + 3]}</td>
@@ -72,29 +57,34 @@ export const CalendarComponent = () => {
   }
 
   return(
-    <div className={'calendar-table'}>
-      <button onClick={handlePrevMonth}>
-        Prev
-      </button>
-      <span>
-        {date.toLocaleString('default', {month: 'long'})}
-        {date.getFullYear()}
-      </span>
-
-      <button onClick={handleNextMonth}>
-        Next
-      </button>
+    <div className='calendar-table'>
+      <div className='calendar-date'>
+        <button onClick={handlePrevMonth}>
+          {arrowLeft}
+        </button>
+        <div className="calendar-date-text">
+          <span style={{fontWeight: 'bold', fontSize: '1.3rem'}}>
+            {date.toLocaleString('default', {month: 'long'}).slice(0, 1).toUpperCase() + date.toLocaleString('default', {month: 'long'}).slice(1)}
+          </span>
+          <span style={{paddingBottom: '1rem', color: '#ffffff9b'}}>
+            {date.getFullYear()}
+          </span>
+        </div>
+        <button onClick={handleNextMonth}>
+          {arrowRight}
+        </button>
+      </div>
 
       <table>
         <thead>
           <tr>
-            <th>Domingo</th>
-            <th>Lunes</th>
-            <th>Martes</th>
-            <th>Miercoles</th>
-            <th>Jueves</th>
-            <th>Viernes</th>
-            <th>Sabado</th>
+            <th>Dom</th>
+            <th>Lun</th>
+            <th>Mar</th>
+            <th>Mie</th>
+            <th>Jue</th>
+            <th>Vie</th>
+            <th>Sab</th>
           </tr>
         </thead>
         <tbody>

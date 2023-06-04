@@ -1,20 +1,15 @@
 import React from 'react'
-import { actualDay, actualMonth, actualYear } from '@/components/calendar'
+import { actualDay, actualMonth, actualYear } from '@/components/Calendar'
+import { iconSearch } from '@/app/icons'
 
 function HeaderComponent() {
   return (
     <header>
-      <button className='btn-create-task'>
-        Crear
-      </button>
-
-      <div className='info-date'>
-        <p>{actualMonth}</p>
-        <span>{actualYear}</span>
-      </div>
-
       <div className='calendar-options'>
-        <input type='search' placeholder='Buscar Tarea' name='search'  />
+        <div className='calendar-search'>
+          <div>{iconSearch}</div>
+          <input type='search' placeholder='Buscar Tarea' name='search'  />
+        </div>
         <div className='options'>
           <div>Hoy</div>
           <div className='active'>Semana</div>

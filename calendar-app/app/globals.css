@@ -22,72 +22,54 @@ body {
 body {
   margin: 0;
   padding: 0;
-}
-
-.btn-create-task {
-  background-color: var(--gray);
-  width: 7rem;
-  height: 2rem;
-  border-radius: 10px;
-  border: none;
-  color: #ffffff;
-  font-weight: bold;
-}
-
-header {
-  display: flex;
-  flex-direction: row;
-  width: 100vw;
-  justify-content: space-between;
-  padding: 2rem 2rem;
-}
-
-.info-date {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-.info-date p {
-  color: #ffffff;
-  font-size: 1.5rem;
-}
-
-.info-date span {
-  color: #ffffff85;
-  
-}
-
-.calendar-options {
+header {
+  width: 100vw;
   display: flex;
   flex-direction: column;
+  padding: 1rem 1rem;
+}
+
+.calendar-search {
+  display: flex; 
+  background-color: #28262B;
+  border-radius: 15px;
   align-items: flex-end;
+  padding-left: 1rem;
+  margin-top: 0.5rem;
 }
 
 .calendar-options input {
-  width: 11rem;
-  height: 2rem;
-  background-color: var(--gray);
-  border-radius: 10px;
+  height: 1.8rem;
+  background-color: var(--dark);
+  border-radius: 15px;
   border: none;
+  font-size: 1rem;
 }
 
 .calendar-options input::placeholder {
-  color: #ffffffd7;
+  color: #ffffffd0;
   padding: 0 0.7rem;
 }
 
 .options {
   display: flex;
-  margin-top: 0.5rem;
-  gap: 0.4rem;
+  flex-direction: row;
+  margin-top: 0.7rem;
+  justify-content: center;
+  gap: 0.5rem;
+  width: 100%;
 }
 
 .options div {
-  background-color: var(--gray);
+  background-color: var(--dark);
   border-radius: 10px;
-  width: 4rem;
-  font-size: 0.9rem;
+  font-size: 1rem;
+  width: 5.2rem;
   text-align: center;
   color: white;
   cursor: pointer;
@@ -97,7 +79,58 @@ header {
   background-color: var(--gold-color);
 }
 
+main {
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+}
+
+.calendar-table {
+  background-color: var(--dark);
+  border-radius: 15px;
+  padding: 0.4rem;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  height: 25rem;
+  width: 90%;
+}
+
+.calendar-date {
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.calendar-date-text {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.calendar-date button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
 td, th {
-  border: 1px var(--charcoal-color) solid;
+  text-align: center;
+  font-size: 1.2rem;
+  width: 2.8rem;
+  height: 2.5rem;
+}
+
+td {
+  cursor: pointer;
+}
+
+td:hover {
+  background-color: #a9a29c5b;
+  border-radius: 50%;
 }
 

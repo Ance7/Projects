@@ -3,8 +3,8 @@ import './globals.css'
 import { rubik } from './fonts'
 import ComponenteH from '@/components/header'
 import dynamic from 'next/dynamic'
-import { CalendarComponent } from '@/components/calendar'
-import HeaderComponent from '@/components/header'
+import { CalendarComponent } from '@/components/Calendar'
+import HeaderComponent from '@/components/Header'
 
 export default function RootLayout({ children }) {
   return (
