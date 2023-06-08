@@ -5,6 +5,7 @@ import ComponenteH from '@/components/header'
 import dynamic from 'next/dynamic'
 import { CalendarComponent } from '@/components/Calendar'
 import HeaderComponent from '@/components/Header'
+import Tags from '@/components/Tags'
 
 export default function RootLayout({ children }) {
   return (
@@ -30,6 +31,8 @@ export default function RootLayout({ children }) {
           </div>
 
           <CalendarComponent />
+
+          <Tags />
 
           {children}
         </main>

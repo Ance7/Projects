@@ -44,16 +44,21 @@ header {
 }
 
 .calendar-options input {
-  height: 1.8rem;
+  height: 2rem;
   background-color: var(--dark);
   border-radius: 15px;
   border: none;
   font-size: 1rem;
+  color: #ffffff;
+  padding: 0 0 0 1rem;
+}
+
+.calendar-options input:focus {
+  outline: none;
 }
 
 .calendar-options input::placeholder {
   color: #ffffffd0;
-  padding: 0 0.7rem;
 }
 
 .options {
@@ -83,6 +88,8 @@ main {
   width: 100vw;
   display: flex;
   justify-content: center;
+  flex-direction: column;
+  align-items: center;
 }
 
 .calendar-table {

@@ -8,7 +8,7 @@ function HeaderComponent() {
       <div className='calendar-options'>
         <div className='calendar-search'>
           <div>{iconSearch}</div>
-          <input type='search' placeholder='Buscar Tarea' name='search'  />
+          <input type='search' placeholder='Buscar Tarea' name='search'/>
         </div>
         <div className='options'>
           <div>Hoy</div>
