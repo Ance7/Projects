@@ -3,7 +3,7 @@
 import { set } from 'date-fns';
 import styles from '../app/page.module.css'
 import React from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 const Tags = () => {
 
@@ -11,7 +11,13 @@ const Tags = () => {
   const [colorTag, setColorTag] = useState(['#00b8d8','#ff7cb3','#00a772'])
   const [newTag, setNewTag] = useState('')
   const [newColorTag, setNewColorTag] = useState('')
-  const [showAddTag, setShowAddTag] = useState(false);
+  const [showAddTag, setShowAddTag] = useState(false)
+  const [hoveredTagIndex, setHoveredTagIndex] = useState(null)
+
+  useEffect(() => {
+    localStorage.getItem('tags') && setTags(JSON.parse(localStorage.getItem('tags')))
+    localStorage.getItem('colorTag') && setColorTag(JSON.parse(localStorage.getItem('colorTag')))
+  }, []);
 
   // const addEvent = () => {
   //   return (
@@ -65,7 +71,19 @@ const Tags = () => {
     setColorTag([...colorTag, newColorTag])
     setNewTag('')
     setNewColorTag('')
-    setShowAddTag(false)
+    localStorage.setItem('tags', JSON.stringify([...tags, newTag]))
+    localStorage.setItem('colorTag', JSON.stringify([...colorTag, newColorTag]))
+  }
+
+  const deleteTag = (tag) => {
+    return () => {
+      const newTags = tags.filter((tags) => tags !== tag)
+      const newColorTags = colorTag.filter((tags) => tags !== tag)
+      setTags(newTags)
+      setColorTag(newColorTags)
+      localStorage.setItem('tags', JSON.stringify(newTags))
+      localStorage.setItem('colorTag', JSON.stringify(newColorTags))
+    }
   }
 
   return (
@@ -76,9 +94,9 @@ const Tags = () => {
           {
             tags.map((tag, index) => {
               return (
-                <div key={index}>
-                  <p style={{backgroundColor: colorTag[index], margin: '0.4rem', padding: '0.2rem 1rem', borderRadius: '15px'}}>
-                    {tag}
+                <div key={index} onMouseEnter={() => setHoveredTagIndex(index)} onMouseLeave={() => setHoveredTagIndex(null)}>
+                  <p className={styles.tag} style={{backgroundColor: colorTag[index], margin: '0.4rem', padding: '0.2rem 1rem', borderRadius: '15px', minWidth: '4.5rem', textAlign: 'center'}}>
+                    {hoveredTagIndex === index ? 'X' : tag}
                   </p>
                 </div>
               )
@@ -105,11 +123,11 @@ const Tags = () => {
               </div>
 
               <div>
-                <input type='text' onChange={handleNewTag} />
+                <input type='text' maxLength={8} onChange={handleNewTag} />
                 <input type='color' onChange={handleNewColorTag} />
               </div>
             </div>
-              <button className={styles.addTagBtn} onClick={() => {addTag()}} disabled={!newTag || !newColorTag}>Agregar</button>
+              <button className={styles.addTagBtn} disabled={!newTag || !newColorTag} onClick={() => addTag()}>Agregar</button>
           </div>
         </>
       )}

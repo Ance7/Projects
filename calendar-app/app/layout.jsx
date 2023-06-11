@@ -3,7 +3,7 @@ import './globals.css'
 import { rubik } from './fonts'
 import ComponenteH from '@/components/header'
 import dynamic from 'next/dynamic'
-import { CalendarComponent } from '@/components/Calendar'
+import { CalendarComponent, MiniCalendarComponent } from '@/components/MiniCcalendar'
 import HeaderComponent from '@/components/Header'
 import Tags from '@/components/Tags'
 
@@ -15,22 +15,7 @@ export default function RootLayout({ children }) {
         <HeaderComponent />
 
         <main>
-          <div className='calendar-info'>
-            <div className='mini-calendar'>
-
-            </div>
-            <div className='tags'>
-
-            </div>
-            <div className='today-events'>
-
-            </div>
-            <div className='tomorrow-events'>
-
-            </div>
-          </div>
-
-          <CalendarComponent />
+          <MiniCalendarComponent />
 
           <Tags />
 

@@ -1,5 +1,5 @@
 import React from 'react'
-import { actualDay, actualMonth, actualYear } from '@/components/Calendar'
+import { actualDay, actualMonth, actualYear } from '@/components/MiniCcalendar'
 import { iconSearch } from '@/app/icons'
 
 function HeaderComponent() {
@@ -9,12 +9,6 @@ function HeaderComponent() {
         <div className='calendar-search'>
           <div>{iconSearch}</div>
           <input type='search' placeholder='Buscar Tarea' name='search'/>
-        </div>
-        <div className='options'>
-          <div>Hoy</div>
-          <div className='active'>Semana</div>
-          <div>Mes</div>
-          <div>Año</div>
         </div>
       </div>
     </header>
