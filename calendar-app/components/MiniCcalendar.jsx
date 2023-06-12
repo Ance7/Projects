@@ -22,13 +22,11 @@ export const MiniCalendarComponent = () => {
   const daysInPrevMonth = new Date(date.getFullYear(), date.getMonth(), 0).getDate()
 
   const prevMonthDays = []
-
   for (let i = firstDayOfMonth - 1; i >= 0; i--) {
     prevMonthDays.push(daysInPrevMonth - i)
   }
 
   const nextMonthDays = []
-
   for (let i = lastDayOfMonth + 1; i <= 6; i++) {
     nextMonthDays.push(i - lastDayOfMonth)
   }
