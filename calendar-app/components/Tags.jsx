@@ -95,7 +95,7 @@ const Tags = () => {
             tags.map((tag, index) => {
               return (
                 <div key={index} onMouseEnter={() => setHoveredTagIndex(index)} onMouseLeave={() => setHoveredTagIndex(null)}>
-                  <p className={styles.tag} style={{backgroundColor: colorTag[index], margin: '0.4rem', padding: '0.2rem 1rem', borderRadius: '15px', minWidth: '4.5rem', textAlign: 'center'}}>
+                  <p className={styles.tag} style={{cursor:'pointer', backgroundColor: colorTag[index], margin: '0.4rem', padding: '0.2rem 1rem', borderRadius: '15px', minWidth: '4.5rem', textAlign: 'center'}}>
                     {hoveredTagIndex === index ? 'X' : tag}
                   </p>
                 </div>

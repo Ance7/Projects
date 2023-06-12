@@ -6,6 +6,7 @@ import dynamic from 'next/dynamic'
 import { CalendarComponent, MiniCalendarComponent } from '@/components/MiniCcalendar'
 import HeaderComponent from '@/components/Header'
 import Tags from '@/components/Tags'
+import Calendar from '@/components/Calendar'
 
 export default function RootLayout({ children }) {
   return (
@@ -18,6 +19,8 @@ export default function RootLayout({ children }) {
           <MiniCalendarComponent />
 
           <Tags />
+
+          <Calendar />
 
           {children}
         </main>

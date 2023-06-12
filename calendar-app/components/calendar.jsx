@@ -1,9 +1,24 @@
-import React from 'react'
+'use client'
 
-function calendar() {
+import React, { useState } from 'react'
+
+function Calendar() {
+  const [optionActive, setOptionActive] = useState('week');
+
   return (
-    <div>calendar</div>
+    <div>
+      <div className='options'>
+          <div >Hoy</div>
+          <div >Semana</div>
+          <div >Mes</div>
+          <div >Año</div>
+      </div>
+
+      <div className='calendar'>
+
+      </div>
+    </div>
   )
 }
 
-export default calendar
+export default Calendar
