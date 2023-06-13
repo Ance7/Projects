@@ -141,13 +141,3 @@ td:hover {
   background-color: #a9a29c5b;
   border-radius: 50%;
 }
-
-.dayActive {
-  background-color: #d6ad6091;
-  border-radius: 50%;
-}
-
-#calendarMonth {
-  color: #000;
-  background-color: #122620;
-}
