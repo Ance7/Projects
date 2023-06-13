@@ -2,6 +2,8 @@
 
 import { task } from '@/Context/task';
 import React, { useState } from 'react'
+import { CalendarDay, CalendarMonth, CalendarWeek, CalendarYear } from './CalendarViews';
+
 
 function Calendar() {
   const [optionActive, setOptionActive] = useState('week')
@@ -12,64 +14,13 @@ function Calendar() {
 
   const handleCalendar = (optDate) => {
     if (optDate === 'today') {
-      let hours = [...Array(19).keys()]
-      return (
-        <div>
-          {
-            hours.map((hour, index) => {
-              return (
-                <div key={index}>
-                  <div>{hour + 6}:00</div>
-                </div>
-              )  
-            }) 
-          }
-        </div>
-      )
+      return <CalendarDay />
     } else if (optDate === 'week') {
-      let todayDate = new Date()
-      let dayDate = todayDate.getDay()
-      let monthDate = todayDate.getMonth() + 1
-      let days = [...Array(7).keys()]
-      let daysName = ['Dom', 'Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab']
-      let hours = [...Array(19).keys()]
-      return (
-        <div>
-          <thead>
-            <tr>
-              <td></td>
-              {
-                days.map((day, index) => {
-                  return (
-                    <td key={index}>
-                      <div>{daysName[day]}</div>
-                      <span>{dayDate + '.'}{monthDate < 10 ? '0'+monthDate : monthDate}</span>
-                    </td>
-                  )  
-                })
-              }
-            </tr>
-          </thead>
-          <tbody>
-              {
-                hours.map((hour, index) => {
-                  return (
-                    <tr key={index}>
-                      <td>{hour + 6} {hour+6 <= 12 ? 'AM' : 'PM'}</td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                    </tr>
-                  )   
-                })
-              }
-          </tbody>
-        </div>
-      )
+      return <CalendarWeek />
+    } else if (optDate === 'month') {
+      return <CalendarMonth />
+    } else if (optDate === 'year') {
+      return <CalendarYear />
     }
   }
 
@@ -85,6 +36,8 @@ function Calendar() {
       <div className='calendar'>
         {optionActive === 'week' ? handleCalendar('week') : null}
         {optionActive === 'today' ? handleCalendar('today') : null}
+        {optionActive === 'month' ? handleCalendar('month') : null}
+        {optionActive === 'year' ? handleCalendar('year') : null}
       </div>
     </div>
   )
