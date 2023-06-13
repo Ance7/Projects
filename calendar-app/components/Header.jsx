@@ -1,5 +1,5 @@
 import React from 'react'
-import { actualDay, actualMonth, actualYear } from '@/components/MiniCcalendar'
+import { actualDay, actualMonth, actualYear } from '@/components/MiniCalendar'
 import { iconSearch } from '@/app/icons'
 
 function HeaderComponent() {

@@ -5,7 +5,7 @@ import { useState } from "react"
 import { arrowLeft, arrowRight } from "@/app/icons"
 import styles from '../app/globals.css'
 
-export const MiniCalendarComponent = () => {
+export const MiniCalendar = () => {
   const [date, setDate] = useState(new Date())
 
   function handlePrevMonth() {
@@ -40,12 +40,12 @@ export const MiniCalendarComponent = () => {
         rows.push(
         <tr key={i}>
           <td style={{color: '#bd0000'}}>{calendar[i]}</td>
-          <td>{calendar[i + 1]}</td>
-          <td>{calendar[i + 2]}</td> 
-          <td>{calendar[i + 3]}</td>
-          <td>{calendar[i + 4]}</td>
-          <td>{calendar[i + 5]}</td>
-          <td>{calendar[i + 6]}</td>
+          <td className={i + 1 === date.getDate() ? 'dayActive' : null}>{calendar[i + 1]}</td>
+          <td className={i + 2 === date.getDate() ? 'dayActive' : null}>{calendar[i + 2]}</td> 
+          <td className={i + 3 === date.getDate() ? 'dayActive' : null}>{calendar[i + 3]}</td>
+          <td className={i + 4 === date.getDate() ? 'dayActive' : null}>{calendar[i + 4]}</td>
+          <td className={i + 5 === date.getDate() ? 'dayActive' : null}>{calendar[i + 5]}</td>
+          <td className={i + 6 === date.getDate() ? 'dayActive' : null}>{calendar[i + 6]}</td>
         </tr>
         )
       }
