@@ -1,13 +1,14 @@
 'use client'
 
 import { set } from 'date-fns';
-import styles from '../app/page.module.css'
+import styles from '@/app/page.module.css'
 import React from 'react';
 import { useState, useEffect } from 'react';
+import { ta } from 'date-fns/locale';
 
 const Tags = () => {
 
-  const [tags, setTags] = useState(['Work', 'Personal', 'Urgent'])
+  const [tags, setTags] = useState(['Trabajo', 'Personal', 'Urgente'])
   const [colorTag, setColorTag] = useState(['#00b8d8','#ff7cb3','#00a772'])
   const [newTag, setNewTag] = useState('')
   const [newColorTag, setNewColorTag] = useState('')
@@ -18,45 +19,6 @@ const Tags = () => {
     localStorage.getItem('tags') && setTags(JSON.parse(localStorage.getItem('tags')))
     localStorage.getItem('colorTag') && setColorTag(JSON.parse(localStorage.getItem('colorTag')))
   }, []);
-
-  // const addEvent = () => {
-  //   return (
-  //     <div className={styles.createEventContainer}>
-  //       <h3>Create event</h3>
-  //       <div className={styles.createEventBody}>
-  //         <div className={styles.createEventText}>
-  //           <div className={styles.createEventInputs}>
-  //             <span>Name</span>
-  //             <input type='text' />
-  //           </div>
-  //           <div className={styles.createEventInputs}>
-  //             <span>Date</span>
-
-  //           </div>
-  //           <div className={styles.createEventInputs}>
-  //             <span>Time</span>
-
-  //           </div>
-  //           <div className={styles.createEventInputs}>
-  //             <span>Tag</span>
-
-  //           </div>
-  //           <div className={styles.createEventInputs}>
-  //             <span>Repeat</span>
-
-  //           </div>
-  //           <div className={styles.createEventInputs}>
-  //             <span>Location</span>
-  //           </div>
-  //           <div className={styles.createEventInputs}>
-  //             <span>Description</span>
-  //             <input type='text' />
-  //           </div>
-  //         </div>
-  //       </div>
-  //     </div>
-  //   )
-  // }
 
   const handleNewTag = (e) => {
     setNewTag(e.target.value)
@@ -94,8 +56,8 @@ const Tags = () => {
           {
             tags.map((tag, index) => {
               return (
-                <div key={index} onMouseEnter={() => setHoveredTagIndex(index)} onMouseLeave={() => setHoveredTagIndex(null)}>
-                  <p className={styles.tag} style={{cursor:'pointer', backgroundColor: colorTag[index], margin: '0.4rem', padding: '0.2rem 1rem', borderRadius: '15px', minWidth: '4.5rem', textAlign: 'center'}}>
+                <div key={index} onMouseEnter={() => setHoveredTagIndex(index)} onMouseLeave={() => setHoveredTagIndex(null)} onClick={deleteTag(tag)}>
+                  <p className={styles.tag} style={{cursor:'pointer', backgroundColor: colorTag[index], margin: '0.4rem', padding: '0.2rem 1.2rem', borderRadius: '15px', minWidth: '4.5rem', textAlign: 'center'}}>
                     {hoveredTagIndex === index ? 'X' : tag}
                   </p>
                 </div>
@@ -106,7 +68,7 @@ const Tags = () => {
       </div>
         {
           tags.length < 7 
-          ? <button className={styles.btnAddTask} onClick={() => setShowAddTag(true)}>+</button>
+          ? <button className={styles.btnAddTag} onClick={() => setShowAddTag(true)}>+</button>
           : null
         }
       </div>
@@ -127,7 +89,16 @@ const Tags = () => {
                 <input type='color' onChange={handleNewColorTag} />
               </div>
             </div>
-              <button className={styles.addTagBtn} disabled={!newTag || !newColorTag} onClick={() => addTag()}>Agregar</button>
+              <button 
+                className={styles.btnNewTag} 
+                disabled={!newTag || !newColorTag} 
+                onClick={() => {
+                  addTag()
+                  setShowAddTag(false)
+                }}
+              >
+                Agregar
+              </button>
           </div>
         </>
       )}

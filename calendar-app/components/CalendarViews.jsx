@@ -1,14 +1,17 @@
-import React from 'react'
+import React, { useState } from 'react' 
 import styles from '@/app/page.module.css'
 import { MiniCalendar } from './MiniCalendar'
 import YearCalendars from './YearCalendars'
+import AddTaskBody from './AddTaskBody'
 
 export const CalendarDay = () => {
+  const [showAddTask, setShowAddTask] = useState(false);
+  
   let hours = [...Array(19).keys()]
   
   return (
     <div style={{position: 'relative'}}>
-      <button className={styles.btnAddTask}>
+      <button className={styles.btnAddTask} onClick={() => setShowAddTask(true)}>
         +
       </button>
 
@@ -32,11 +35,22 @@ export const CalendarDay = () => {
           }
         </tbody>
       </table>
+
+      {showAddTask && (
+        <>
+          <div className={styles.addTaskOverlay} onClick={() => setShowAddTask(false)} />
+
+          <AddTaskBody />
+        </>
+        )
+      }
     </div>
   )
 }
 
 export const CalendarWeek = () => {
+  const [showAddTask, setShowAddTask] = useState(false);
+
   let todayDate = new Date()
   let dayDate = todayDate.getDay()
   let monthDate = todayDate.getMonth() + 1
@@ -47,9 +61,9 @@ export const CalendarWeek = () => {
   return (
     <div style={{position: 'relative'}}>
 
-      <button className={styles.btnAddTask} onClick={}>
+      <button className={styles.btnAddTask} onClick={() => setShowAddTask(true)}>
           +
-        </button>
+      </button>
 
       <table className={styles.monthCalendar}>
         <thead>
@@ -86,6 +100,15 @@ export const CalendarWeek = () => {
             }
         </tbody>
       </table>
+
+      {showAddTask && (
+        <>
+          <div className={styles.addTaskOverlay} onClick={() => setShowAddTask(false)} />
+
+          <AddTaskBody />
+        </>
+      )
+    }
     </div>
   )
 }
