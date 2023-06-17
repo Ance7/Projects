@@ -7,26 +7,32 @@ export const CalendarDay = () => {
   let hours = [...Array(19).keys()]
   
   return (
-    <table className={styles.dayCalendar}>
-      <tbody>
-        {
-          hours.map((hour, index) => {
-            return (
-              <tr key={index}>
-                <td>{hour + 6}:00</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-              </tr>
-            )  
-          }) 
-        }
-      </tbody>
-    </table>
+    <div style={{position: 'relative'}}>
+      <button className={styles.btnAddTask}>
+        +
+      </button>
+
+      <table className={styles.dayCalendar}>
+        <tbody>
+          {
+            hours.map((hour, index) => {
+              return (
+                <tr key={index}>
+                  <td>{hour + 6}:00</td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                </tr>
+              )  
+            }) 
+          }
+        </tbody>
+      </table>
+    </div>
   )
 }
 
@@ -39,41 +45,48 @@ export const CalendarWeek = () => {
   let hours = [...Array(19).keys()]
   
   return (
-    <table className={styles.monthCalendar}>
-      <thead>
-        <tr>
-          <td></td>
-          {
-            days.map((day, index) => {
-              return (
-                <td key={index}>
-                  <div>{daysName[day]}</div>
-                  <span>{dayDate + '.'}{monthDate < 10 ? '0'+monthDate : monthDate}</span>
-                </td>
-              )  
-            })
-          }
-        </tr>
-      </thead>
-      <tbody>
-          {
-            hours.map((hour, index) => {
-              return (
-                <tr key={index} className={styles.hoursMonth}>
-                  <td>{hour + 6} {hour+6 <= 12 ? 'AM' : 'PM'}</td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                </tr>
-              )   
-            })
-          }
-      </tbody>
-    </table>
+    <div style={{position: 'relative'}}>
+
+      <button className={styles.btnAddTask} onClick={}>
+          +
+        </button>
+
+      <table className={styles.monthCalendar}>
+        <thead>
+          <tr>
+            <td></td>
+            {
+              days.map((day, index) => {
+                return (
+                  <td key={index}>
+                    <div>{daysName[day]}</div>
+                    <span>{dayDate + '.'}{monthDate < 10 ? '0'+monthDate : monthDate}</span>
+                  </td>
+                )  
+              })
+            }
+          </tr>
+        </thead>
+        <tbody>
+            {
+              hours.map((hour, index) => {
+                return (
+                  <tr key={index} className={styles.hoursMonth}>
+                    <td>{hour + 6} {hour+6 <= 12 ? 'AM' : 'PM'}</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                  </tr>
+                )   
+              })
+            }
+        </tbody>
+      </table>
+    </div>
   )
 }
 
