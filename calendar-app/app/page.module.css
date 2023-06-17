@@ -144,7 +144,7 @@
   color: #FFFFFF;
   border-radius: 10px;
   margin-top: 1.5rem;
-  padding: 1rem 0 1rem 0;
+  padding: 1rem 0.6rem;
 }
 
 .monthCalendar td {
@@ -160,4 +160,19 @@
 .monthCalendar td:hover {
   border-radius: 0;
   background-color: transparent;
+}
+
+.dayCalendar {
+  background-color: #28262B;
+  color: #FFFFFF;
+  border-radius: 10px;
+  margin-top: 1.5rem;
+  padding: 1rem 0.6rem;
+}
+
+.dayCalendar td {
+  font-size: 0.7rem;
+  border-bottom: 1px solid #FFFFFF;
+  height: 2.5rem;
+  align-items: center;
 }

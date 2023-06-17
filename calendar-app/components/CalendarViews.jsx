@@ -7,17 +7,26 @@ export const CalendarDay = () => {
   let hours = [...Array(19).keys()]
   
   return (
-    <div>
-      {
-        hours.map((hour, index) => {
-          return (
-            <div key={index}>
-              <div>{hour + 6}:00</div>
-            </div>
-          )  
-        }) 
-      }
-    </div>
+    <table className={styles.dayCalendar}>
+      <tbody>
+        {
+          hours.map((hour, index) => {
+            return (
+              <tr key={index}>
+                <td>{hour + 6}:00</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+              </tr>
+            )  
+          }) 
+        }
+      </tbody>
+    </table>
   )
 }
 
