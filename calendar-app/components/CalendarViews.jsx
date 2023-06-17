@@ -1,6 +1,7 @@
 import React from 'react'
 import styles from '@/app/page.module.css'
 import { MiniCalendar } from './MiniCalendar'
+import YearCalendars from './YearCalendars'
 
 export const CalendarDay = () => {
   let hours = [...Array(19).keys()]
@@ -29,7 +30,7 @@ export const CalendarWeek = () => {
   let hours = [...Array(19).keys()]
   
   return (
-    <table>
+    <table className={styles.monthCalendar}>
       <thead>
         <tr>
           <td></td>
@@ -49,7 +50,7 @@ export const CalendarWeek = () => {
           {
             hours.map((hour, index) => {
               return (
-                <tr key={index}>
+                <tr key={index} className={styles.hoursMonth}>
                   <td>{hour + 6} {hour+6 <= 12 ? 'AM' : 'PM'}</td>
                   <td></td>
                   <td></td>
@@ -69,12 +70,40 @@ export const CalendarWeek = () => {
 
 export const CalendarMonth = () => {
   return (
-    <div>
-      <MiniCalendar />
+    <div style={{marginTop: '1.5rem', width: '100%'}}>
+      <MiniCalendar/>
     </div>
   )
 }
 
+const YearTable = () => {
+  const months = Array.from({ length: 12 }, (_, i) => new Date(new Date().getFullYear(), i))
+  const monthsPerRow = 3
+  const rows = Array.from({ length: Math.ceil(months.length / monthsPerRow) }, (_, i) => months.slice(i * monthsPerRow, (i + 1) * monthsPerRow))
+
+  return (
+    <table>
+      <tbody>
+        {
+          rows.map((row, rowIndex) => (
+            <tr key={rowIndex}>
+              {row.map((month, monthIndex) => (
+                <td key={monthIndex}>
+                  <YearCalendars date={month} />
+                </td>
+              ))}
+            </tr>
+          ))
+        }
+      </tbody>
+    </table>
+  )
+}
+
 export const CalendarYear = () => {
-  
+  return (
+    <div className={styles.yearCalendarContainer}>
+      <YearTable />
+    </div>
+  )
 }

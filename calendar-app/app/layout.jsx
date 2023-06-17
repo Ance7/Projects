@@ -1,9 +1,9 @@
 // import Link from 'next/link'
 import './globals.css'
 import { rubik } from './fonts'
-import ComponenteH from '@/components/header'
+import ComponenteH from '@/components/SearchTask'
 import dynamic from 'next/dynamic'
-import HeaderComponent from '@/components/Header'
+import HeaderComponent from '@/components/SearchTask'
 import Tags from '@/components/Tags'
 import Calendar from '@/components/Calendar'
 import { MiniCalendar } from '@/components/MiniCalendar'
@@ -16,7 +16,9 @@ export default function RootLayout({ children }) {
         <HeaderComponent />
 
         <main>
-          <MiniCalendar />
+          <div className='calendar-container'>
+            <MiniCalendar />
+          </div>
 
           <Tags />
 

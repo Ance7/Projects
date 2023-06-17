@@ -105,7 +105,59 @@
   color: #28262B;
 }
 
-.calendarMonth {
-  color: #000;
-  background-color: #122620;
+.yearCalendarView {
+  background-color: #28262B;
+  color: #FFFFFF;
+  border-radius: 10px;
+  margin: 0.15rem;
+  min-height: 9rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  font-size: 0.8rem;
+  cursor: auto;
+}
+
+.yearCalendarView td, .yearCalendarView th {
+  width: 0.7rem;
+  height: 0.7rem;
+  font-size: 0.6rem;
+  cursor: auto;
+}
+
+.yearCalendarView span {
+  font-weight: bold;
+}
+
+.yearCalendarContainer {
+  max-width: 100%;
+  margin: 1rem 0 2rem 0;
+}
+
+.yearCalendarContainer td:hover {
+  border-radius: 0;
+  background-color: transparent;
+}
+
+.monthCalendar {
+  background-color: #28262B;
+  color: #FFFFFF;
+  border-radius: 10px;
+  margin-top: 1.5rem;
+  padding: 1rem 0 1rem 0;
+}
+
+.monthCalendar td {
+  font-size: 0.8rem;
+  cursor: auto;
+}
+
+.hoursMonth td{
+  border-bottom: #FFFFFF 1px solid;
+  font-size: 0.6rem;
+}
+
+.monthCalendar td:hover {
+  border-radius: 0;
+  background-color: transparent;
 }
