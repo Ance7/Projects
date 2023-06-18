@@ -4,7 +4,7 @@ import { MiniCalendar } from './MiniCalendar'
 import YearCalendars from './YearCalendars'
 import AddTaskBody from './AddTaskBody'
 
-export const CalendarDay = () => {
+export const CalendarDay = ({ tags, colorTag, tasks, setTasks }) => {
   const [showAddTask, setShowAddTask] = useState(false);
   
   let hours = [...Array(19).keys()]
@@ -40,7 +40,7 @@ export const CalendarDay = () => {
         <>
           <div className={styles.addTaskOverlay} onClick={() => setShowAddTask(false)} />
 
-          <AddTaskBody />
+          <AddTaskBody tags={tags} colorTag={colorTag} tasks={tasks} setTasks={setTasks} />
         </>
         )
       }
@@ -48,7 +48,7 @@ export const CalendarDay = () => {
   )
 }
 
-export const CalendarWeek = () => {
+export const CalendarWeek = ({ tags, colorTag, tasks, setTasks}) => {
   const [showAddTask, setShowAddTask] = useState(false);
 
   let todayDate = new Date()
@@ -105,7 +105,7 @@ export const CalendarWeek = () => {
         <>
           <div className={styles.addTaskOverlay} onClick={() => setShowAddTask(false)} />
 
-          <AddTaskBody />
+          <AddTaskBody tags={tags} colorTag={colorTag} tasks={tasks} setTasks={setTasks} setShowAddTask={setShowAddTask} />
         </>
       )
     }

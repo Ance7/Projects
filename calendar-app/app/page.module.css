@@ -360,3 +360,25 @@
 .addTaskHourInput p {
   margin: 0;
 }
+
+.addTaskBodyTags {
+  border-radius: 15px;
+  padding: 0.2rem 0.8rem;
+  text-align: center;
+  margin: 0.4rem;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  opacity: 0.5;
+}
+
+.addTaskBodyTagsContainer {
+  display: flex;
+  flex-wrap: wrap;
+  width: 12rem;
+}
+
+.tagActive {
+  padding: 0.4rem 1rem;
+  border-radius: 15px;
+  margin: 0.4rem;
+}

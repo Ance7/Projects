@@ -1,9 +1,17 @@
 import React, { useState } from 'react'
 import styles from '@/app/page.module.css'
 import { miniArrowLeft, miniArrowRight } from '@/app/icons';
-const AddTaskBody = () => {
+
+const AddTaskBody = ({ tags, colorTag, tasks, setTasks, setShowAddTask }) => {
   const [initHour, setInitHour] = useState(8);
   const [finishHour, setFinishHour] = useState(15);
+
+  const [tagSelect, setTagSelect] = useState('')
+
+  const [taskName, setTaskName] = useState('')
+  const [taskDate, setTaskDate] = useState('')
+  const [taskRepeat, setTaskRepeat] = useState('')
+  const [taskDescription, setTaskDescription] = useState('')
 
   const handleInitHour = (ope) => {
     if (ope === 'inc') {
@@ -18,12 +26,45 @@ const AddTaskBody = () => {
 
   const handleFinishHour = (ope) => {
     if (ope === 'inc') {
-      if(finishHour === 23) return 
+      if(finishHour === 23) return
       setFinishHour(finishHour + 1)
     } else if (ope === 'dec') {
       if(finishHour === initHour + 1) return
       setFinishHour(finishHour - 1)
     }
+  }
+
+  const handleSelectTag = (tag) => {
+    setTagSelect(tag)
+  }
+
+  const handleChangeName = (e) => {
+    setTaskName(e.target.value)
+  }
+
+  const handleChangeDate = (e) => {
+    setTaskDate(e.target.value)
+  }
+
+  const handleChangeRepeat = (e) => {
+    setTaskRepeat(e.target.value)
+  }
+
+  const handleChangeDescription = (e) => {
+    setTaskDescription(e.target.value)
+  }
+
+  const createTask = (event) => {
+    event.preventDefault();
+    setTasks([...tasks, {
+      name: taskName,
+      date: taskDate,
+      initHour: initHour,
+      finishHour: finishHour,
+      tag: tagSelect,
+      repeat: taskRepeat,
+      description: taskDescription
+    }])
   }
 
   return (
@@ -32,13 +73,13 @@ const AddTaskBody = () => {
       <form className={styles.addTaskBody}>
         <div>
           <label>Nombre</label>
-          <input type="text" placeholder='Ingresa el nombre' maxLength={10} />
+          <input type="text" placeholder='Ingresa el nombre' maxLength={10} onChange={handleChangeName}/>
         </div>
         <div>
           <label>Fecha</label>
-          <input type="date"/>
+          <input type="date" onChange={handleChangeDate}/>
         </div>
-        <div style={{}}>
+        <div>
           <label>Hora</label>
           <div className={styles.addTaskHourInput}>
             <div>
@@ -48,34 +89,51 @@ const AddTaskBody = () => {
             </div>
             <div>
               <span onClick={() => handleFinishHour('dec')}>{miniArrowLeft}</span>
-              <p>{finishHour}{finishHour >= 12 ? ':00 PM' : ':00 AM'}</p> 
+              <p>{finishHour}{finishHour >= 12 ? ':00 PM' : ':00 AM'}</p>
               <span onClick={() => handleFinishHour('inc')}>{miniArrowRight}</span>
             </div>
           </div>
         </div>
         <div>
           <label>Tag</label>
-          <div style={{}}>
-            
+          <div className={styles.addTaskBodyTagsContainer}>
+            {
+              tags.map((tag, index) => {
+              return (
+                <div key={index}>
+                  <p style={{backgroundColor: colorTag[index]}} className={tagSelect === tag ? styles.tagActive : styles.addTaskBodyTags} onClick={() => {handleSelectTag(tag)}}>
+                    {tag}
+                  </p>
+                </div>
+                )
+              })
+            }
           </div>
         </div>
         <div>
           <label>Repetir</label>
-          <select>
-            <option value="1">Todos los dias</option>
-            <option value="1">Solo un dia</option>
-            <option value="1">Cada semana</option>
-            <option value="1">Cada mes</option>
+          <select onChange={handleChangeRepeat}>
+            <option value="everyDays">Todos los dias</option>
+            <option value="oneDay">Solo un dia</option>
+            <option value="everyWeek">Cada semana</option>
+            <option value="everyMonth">Cada mes</option>
           </select>
         </div>
         <div>
           <label>Descripcion</label>
-          <textarea type="text" placeholder='Ingresa la descripcion' maxLength={50}/>
+          <textarea type="text" placeholder='Ingresa la descripcion' maxLength={50} onChange={handleChangeDescription}/>
         </div>
 
         <div className={styles.addTaskLine} />
 
-        <button className={styles.btnCreateTask}>Crear</button>
+        <button 
+          className={styles.btnCreateTask} 
+          onClick={ () => {
+            createTask(event)
+            setShowAddTask(false)
+          }}>
+            Crear
+          </button>
       </form>
     </div>
   );

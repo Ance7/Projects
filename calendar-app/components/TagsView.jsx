@@ -1,23 +1,22 @@
 'use client'
 
-import { set } from 'date-fns';
 import styles from '@/app/page.module.css'
-import React from 'react';
-import { useState, useEffect } from 'react';
-import { ta } from 'date-fns/locale';
+import React from 'react'
+import { useState, useEffect } from 'react'
 
-const Tags = () => {
-
-  const [tags, setTags] = useState(['Trabajo', 'Personal', 'Urgente'])
-  const [colorTag, setColorTag] = useState(['#00b8d8','#ff7cb3','#00a772'])
+const TagsView = ({ tags, setTags, colorTag, setColorTag}) => {
   const [newTag, setNewTag] = useState('')
   const [newColorTag, setNewColorTag] = useState('')
   const [showAddTag, setShowAddTag] = useState(false)
   const [hoveredTagIndex, setHoveredTagIndex] = useState(null)
 
   useEffect(() => {
-    localStorage.getItem('tags') && setTags(JSON.parse(localStorage.getItem('tags')))
-    localStorage.getItem('colorTag') && setColorTag(JSON.parse(localStorage.getItem('colorTag')))
+    if (localStorage.getItem('tags')) {
+      setTags(JSON.parse(localStorage.getItem('tags')))
+    }
+    if (localStorage.getItem('colorTag')) {
+      setColorTag(JSON.parse(localStorage.getItem('colorTag')))
+    }
   }, []);
 
   const handleNewTag = (e) => {
@@ -54,10 +53,10 @@ const Tags = () => {
       <div className={styles.tagsBody}>
         <div className={styles.tags}>
           {
-            tags.map((tag, index) => {
+            tags && tags.map((tag, index) => {
               return (
                 <div key={index} onMouseEnter={() => setHoveredTagIndex(index)} onMouseLeave={() => setHoveredTagIndex(null)} onClick={deleteTag(tag)}>
-                  <p className={styles.tag} style={{cursor:'pointer', backgroundColor: colorTag[index], margin: '0.4rem', padding: '0.2rem 1.2rem', borderRadius: '15px', minWidth: '4.5rem', textAlign: 'center'}}>
+                  <p style={{cursor:'pointer', backgroundColor: colorTag[index], margin: '0.4rem', padding: '0.2rem 1.2rem', borderRadius: '15px', minWidth: '4.5rem', textAlign: 'center'}}>
                     {hoveredTagIndex === index ? 'X' : tag}
                   </p>
                 </div>
@@ -67,7 +66,7 @@ const Tags = () => {
 
       </div>
         {
-          tags.length < 7 
+          tags && tags.length < 7 
           ? <button className={styles.btnAddTag} onClick={() => setShowAddTag(true)}>+</button>
           : null
         }
@@ -106,4 +105,4 @@ const Tags = () => {
   );
 }
 
-export default Tags;
+export default TagsView;

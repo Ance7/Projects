@@ -1,11 +1,10 @@
 'use client'
 
-import { task } from '@/Context/task';
 import React, { useState } from 'react'
 import { CalendarDay, CalendarMonth, CalendarWeek, CalendarYear } from './CalendarViews';
 
 
-function Calendar() {
+function Calendar({ tags, colorTag, tasks, setTasks }) {
   const [optionActive, setOptionActive] = useState('week')
 
   const handleClick = (optDate) => {
@@ -14,9 +13,9 @@ function Calendar() {
 
   const handleCalendar = (optDate) => {
     if (optDate === 'today') {
-      return <CalendarDay />
+      return <CalendarDay tags={tags} colorTag={colorTag} tasks={tasks} setTasks={setTasks} />
     } else if (optDate === 'week') {
-      return <CalendarWeek />
+      return <CalendarWeek tags={tags} colorTag={colorTag} tasks={tasks} setTasks={setTasks} />
     } else if (optDate === 'month') {
       return <CalendarMonth />
     } else if (optDate === 'year') {
