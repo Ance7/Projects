@@ -1,8 +1,7 @@
 import React from 'react'
-import { actualDay, actualMonth, actualYear } from '@/components/MiniCalendar'
 import { iconSearch } from '@/app/icons'
 
-function HeaderComponent() {
+function HeaderComponent () {
   return (
     <header>
       <div className='calendar-options'>

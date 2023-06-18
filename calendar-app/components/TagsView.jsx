@@ -1,10 +1,10 @@
+/* eslint-disable no-undef */
 'use client'
 
 import styles from '@/app/page.module.css'
-import React from 'react'
-import { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 
-const TagsView = ({ tags, setTags, colorTag, setColorTag}) => {
+const TagsView = ({ tags, setTags, colorTag, setColorTag }) => {
   const [newTag, setNewTag] = useState('')
   const [newColorTag, setNewColorTag] = useState('')
   const [showAddTag, setShowAddTag] = useState(false)
@@ -17,7 +17,7 @@ const TagsView = ({ tags, setTags, colorTag, setColorTag}) => {
     if (localStorage.getItem('colorTag')) {
       setColorTag(JSON.parse(localStorage.getItem('colorTag')))
     }
-  }, []);
+  }, [])
 
   const handleNewTag = (e) => {
     setNewTag(e.target.value)
@@ -56,7 +56,7 @@ const TagsView = ({ tags, setTags, colorTag, setColorTag}) => {
             tags && tags.map((tag, index) => {
               return (
                 <div key={index} onMouseEnter={() => setHoveredTagIndex(index)} onMouseLeave={() => setHoveredTagIndex(null)} onClick={deleteTag(tag)}>
-                  <p style={{cursor:'pointer', backgroundColor: colorTag[index], margin: '0.4rem', padding: '0.2rem 1.2rem', borderRadius: '15px', minWidth: '4.5rem', textAlign: 'center'}}>
+                  <p style={{ cursor: 'pointer', backgroundColor: colorTag[index], margin: '0.4rem', padding: '0.2rem 1.2rem', borderRadius: '15px', minWidth: '4.5rem', textAlign: 'center' }}>
                     {hoveredTagIndex === index ? 'X' : tag}
                   </p>
                 </div>
@@ -66,9 +66,9 @@ const TagsView = ({ tags, setTags, colorTag, setColorTag}) => {
 
       </div>
         {
-          tags && tags.length < 7 
-          ? <button className={styles.btnAddTag} onClick={() => setShowAddTag(true)}>+</button>
-          : null
+          tags && tags.length < 7
+            ? <button className={styles.btnAddTag} onClick={() => setShowAddTag(true)}>+</button>
+            : null
         }
       </div>
       {showAddTag && (
@@ -76,7 +76,7 @@ const TagsView = ({ tags, setTags, colorTag, setColorTag}) => {
           <div className={styles.addTagOverlay} onClick={() => setShowAddTag(false)} />
 
           <div className={styles.addTagContainer}>
-            <h3 style={{fontSize: '1.6rem', textDecoration: 'underline', color: '#D6AD60'}}>Nuevo Tag</h3>
+            <h3 style={{ fontSize: '1.6rem', textDecoration: 'underline', color: '#D6AD60' }}>Nuevo Tag</h3>
             <div className={styles.addTagBody}>
               <div>
                 <span>Nombre:</span>
@@ -88,9 +88,9 @@ const TagsView = ({ tags, setTags, colorTag, setColorTag}) => {
                 <input type='color' onChange={handleNewColorTag} />
               </div>
             </div>
-              <button 
-                className={styles.btnNewTag} 
-                disabled={!newTag || !newColorTag} 
+              <button
+                className={styles.btnNewTag}
+                disabled={!newTag || !newColorTag}
                 onClick={() => {
                   addTag()
                   setShowAddTag(false)
@@ -102,7 +102,7 @@ const TagsView = ({ tags, setTags, colorTag, setColorTag}) => {
         </>
       )}
     </div>
-  );
+  )
 }
 
-export default TagsView;
+export default TagsView

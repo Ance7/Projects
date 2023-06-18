@@ -1,18 +1,18 @@
 'use client'
 
-import { useState } from "react"
+import { useState } from 'react'
 
-import { arrowLeft, arrowRight } from "@/app/icons"
+import { arrowLeft, arrowRight } from '@/app/icons'
 import styles from '../app/globals.css'
 
 export const MiniCalendar = () => {
   const [date, setDate] = useState(new Date())
 
-  function handlePrevMonth() {
+  function handlePrevMonth () {
     setDate(new Date(date.getFullYear(), date.getMonth() - 1))
   }
 
-  function handleNextMonth() {
+  function handleNextMonth () {
     setDate(new Date(date.getFullYear(), date.getMonth() + 1))
   }
 
@@ -32,16 +32,16 @@ export const MiniCalendar = () => {
   }
 
   const changeCalendar = () => {
-    let calendar = [...prevMonthDays, ...Array.from({length: daysInMonth}, (_, i) => i + 1), ...nextMonthDays]
-    let rows = []
+    const calendar = [...prevMonthDays, ...Array.from({ length: daysInMonth }, (_, i) => i + 1), ...nextMonthDays]
+    const rows = []
 
     for (let i = 0; i < calendar.length; i++) {
       if (i % 7 === 0) {
         rows.push(
         <tr key={i}>
-          <td style={{color: '#bd0000'}}>{calendar[i]}</td>
+          <td style={{ color: '#bd0000' }}>{calendar[i]}</td>
           <td className={i + 1 === date.getDate() ? 'dayActive' : null}>{calendar[i + 1]}</td>
-          <td className={i + 2 === date.getDate() ? 'dayActive' : null}>{calendar[i + 2]}</td> 
+          <td className={i + 2 === date.getDate() ? 'dayActive' : null}>{calendar[i + 2]}</td>
           <td className={i + 3 === date.getDate() ? 'dayActive' : null}>{calendar[i + 3]}</td>
           <td className={i + 4 === date.getDate() ? 'dayActive' : null}>{calendar[i + 4]}</td>
           <td className={i + 5 === date.getDate() ? 'dayActive' : null}>{calendar[i + 5]}</td>
@@ -54,17 +54,17 @@ export const MiniCalendar = () => {
     return rows
   }
 
-  return(
+  return (
     <div className='calendar-table'>
       <div className='calendar-date'>
         <button onClick={handlePrevMonth}>
           {arrowLeft}
         </button>
         <div className="calendar-date-text">
-          <span style={{fontWeight: 'bold', fontSize: '1.3rem'}}>
-            {date.toLocaleString('default', {month: 'long'}).slice(0, 1).toUpperCase() + date.toLocaleString('default', {month: 'long'}).slice(1)}
+          <span style={{ fontWeight: 'bold', fontSize: '1.3rem' }}>
+            {date.toLocaleString('default', { month: 'long' }).slice(0, 1).toUpperCase() + date.toLocaleString('default', { month: 'long' }).slice(1)}
           </span>
-          <span style={{paddingBottom: '1rem', color: '#ffffff9b'}}>
+          <span style={{ paddingBottom: '1rem', color: '#ffffff9b' }}>
             {date.getFullYear()}
           </span>
         </div>
@@ -90,5 +90,5 @@ export const MiniCalendar = () => {
         </tbody>
       </table>
     </div>
-    )
+  )
 }

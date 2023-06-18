@@ -1,6 +1,6 @@
 'use client'
 
-import React from 'react';
+import React from 'react'
 import styles from '../app/page.module.css'
 
 const YearCalendars = ({ date }) => {
@@ -20,16 +20,16 @@ const YearCalendars = ({ date }) => {
   }
 
   const changeCalendar = () => {
-    let calendar = [...prevMonthDays, ...Array.from({length: daysInMonth}, (_, i) => i + 1), ...nextMonthDays]
-    let rows = []
+    const calendar = [...prevMonthDays, ...Array.from({ length: daysInMonth }, (_, i) => i + 1), ...nextMonthDays]
+    const rows = []
 
     for (let i = 0; i < calendar.length; i++) {
       if (i % 7 === 0) {
         rows.push(
         <tr key={i}>
-          <td style={{color: '#bd0000'}}>{calendar[i]}</td>
+          <td style={{ color: '#bd0000' }}>{calendar[i]}</td>
           <td>{calendar[i + 1]}</td>
-          <td>{calendar[i + 2]}</td> 
+          <td>{calendar[i + 2]}</td>
           <td>{calendar[i + 3]}</td>
           <td>{calendar[i + 4]}</td>
           <td>{calendar[i + 5]}</td>
@@ -42,12 +42,12 @@ const YearCalendars = ({ date }) => {
     return rows
   }
 
-  return(
+  return (
     <div className={styles.yearCalendarView}>
       <div>
         <div>
           <span>
-            {date.toLocaleString('default', {month: 'long'}).slice(0, 1).toUpperCase() + date.toLocaleString('default', {month: 'long'}).slice(1)}
+            {date.toLocaleString('default', { month: 'long' }).slice(0, 1).toUpperCase() + date.toLocaleString('default', { month: 'long' }).slice(1)}
           </span>
         </div>
       </div>
@@ -72,4 +72,4 @@ const YearCalendars = ({ date }) => {
   )
 }
 
-export default YearCalendars;
+export default YearCalendars

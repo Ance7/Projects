@@ -8,11 +8,10 @@ import { MiniCalendar } from '@/components/MiniCalendar'
 import TagsView from '@/components/TagsView'
 import { useState } from 'react'
 
-export default function RootLayout({ children }) {
-
+export default function RootLayout ({ children }) {
   const [tags, setTags] = useState(['Trabajo', 'Personal', 'Urgente'])
-  const [colorTag, setColorTag] = useState(['#00b8d8','#ff7cb3','#00a772'])
-  const [tasks, setTasks] = useState([]);
+  const [colorTag, setColorTag] = useState(['#00b8d8', '#ff7cb3', '#00a772'])
+  const [tasks, setTasks] = useState([])
 
   return (
     <html lang="en">

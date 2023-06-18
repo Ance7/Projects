@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
 import styles from '@/app/page.module.css'
-import { miniArrowLeft, miniArrowRight } from '@/app/icons';
+import { miniArrowLeft, miniArrowRight } from '@/app/icons'
 
 const AddTaskBody = ({ tags, colorTag, tasks, setTasks, setShowAddTask }) => {
-  const [initHour, setInitHour] = useState(8);
-  const [finishHour, setFinishHour] = useState(15);
+  const [initHour, setInitHour] = useState(8)
+  const [finishHour, setFinishHour] = useState(15)
 
   const [tagSelect, setTagSelect] = useState('')
 
@@ -15,21 +15,21 @@ const AddTaskBody = ({ tags, colorTag, tasks, setTasks, setShowAddTask }) => {
 
   const handleInitHour = (ope) => {
     if (ope === 'inc') {
-      if(initHour === 22) return
-      if(initHour === finishHour - 1) return
+      if (initHour === 22) return
+      if (initHour === finishHour - 1) return
       setInitHour(initHour + 1)
     } else if (ope === 'dec') {
-      if(initHour === 5) return
+      if (initHour === 5) return
       setInitHour(initHour - 1)
     }
   }
 
   const handleFinishHour = (ope) => {
     if (ope === 'inc') {
-      if(finishHour === 23) return
+      if (finishHour === 23) return
       setFinishHour(finishHour + 1)
     } else if (ope === 'dec') {
-      if(finishHour === initHour + 1) return
+      if (finishHour === initHour + 1) return
       setFinishHour(finishHour - 1)
     }
   }
@@ -55,12 +55,12 @@ const AddTaskBody = ({ tags, colorTag, tasks, setTasks, setShowAddTask }) => {
   }
 
   const createTask = (event) => {
-    event.preventDefault();
+    event.preventDefault()
     setTasks([...tasks, {
       name: taskName,
       date: taskDate,
-      initHour: initHour,
-      finishHour: finishHour,
+      initHour: Number(initHour),
+      finishHour: Number(finishHour),
       tag: tagSelect,
       repeat: taskRepeat,
       description: taskDescription
@@ -69,7 +69,7 @@ const AddTaskBody = ({ tags, colorTag, tasks, setTasks, setShowAddTask }) => {
 
   return (
     <div className={styles.addTaskContainer}>
-      <h3 style={{fontSize: '1.7rem', color: '#B68D40'}}>Crea un evento</h3>
+      <h3 style={{ fontSize: '1.7rem', color: '#B68D40' }}>Crea un evento</h3>
       <form className={styles.addTaskBody}>
         <div>
           <label>Nombre</label>
@@ -99,12 +99,12 @@ const AddTaskBody = ({ tags, colorTag, tasks, setTasks, setShowAddTask }) => {
           <div className={styles.addTaskBodyTagsContainer}>
             {
               tags.map((tag, index) => {
-              return (
-                <div key={index}>
-                  <p style={{backgroundColor: colorTag[index]}} className={tagSelect === tag ? styles.tagActive : styles.addTaskBodyTags} onClick={() => {handleSelectTag(tag)}}>
-                    {tag}
-                  </p>
-                </div>
+                return (
+                  <div key={index}>
+                    <p style={{ backgroundColor: colorTag[index] }} className={tagSelect === tag ? styles.tagActive : styles.addTaskBodyTags} onClick={() => { handleSelectTag(tag) }}>
+                      {tag}
+                    </p>
+                  </div>
                 )
               })
             }
@@ -126,9 +126,10 @@ const AddTaskBody = ({ tags, colorTag, tasks, setTasks, setShowAddTask }) => {
 
         <div className={styles.addTaskLine} />
 
-        <button 
-          className={styles.btnCreateTask} 
+        <button
+          className={styles.btnCreateTask}
           onClick={ () => {
+            // eslint-disable-next-line no-undef
             createTask(event)
             setShowAddTask(false)
           }}>
@@ -136,7 +137,7 @@ const AddTaskBody = ({ tags, colorTag, tasks, setTasks, setShowAddTask }) => {
           </button>
       </form>
     </div>
-  );
+  )
 }
 
 export default AddTaskBody

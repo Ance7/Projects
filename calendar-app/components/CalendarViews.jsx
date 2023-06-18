@@ -1,16 +1,16 @@
-import React, { useState } from 'react' 
+import React, { useState } from 'react'
 import styles from '@/app/page.module.css'
 import { MiniCalendar } from './MiniCalendar'
 import YearCalendars from './YearCalendars'
 import AddTaskBody from './AddTaskBody'
 
 export const CalendarDay = ({ tags, colorTag, tasks, setTasks }) => {
-  const [showAddTask, setShowAddTask] = useState(false);
-  
-  let hours = [...Array(19).keys()]
-  
+  const [showAddTask, setShowAddTask] = useState(false)
+
+  const hours = [...Array(19).keys()]
+
   return (
-    <div style={{position: 'relative'}}>
+    <div style={{ position: 'relative' }}>
       <button className={styles.btnAddTask} onClick={() => setShowAddTask(true)}>
         +
       </button>
@@ -30,36 +30,36 @@ export const CalendarDay = ({ tags, colorTag, tasks, setTasks }) => {
                   <td></td>
                   <td></td>
                 </tr>
-              )  
-            }) 
+              )
+            })
           }
         </tbody>
       </table>
+      {
+        showAddTask && (
+          <>
+            <div className={styles.addTaskOverlay} onClick={() => setShowAddTask(false)} />
 
-      {showAddTask && (
-        <>
-          <div className={styles.addTaskOverlay} onClick={() => setShowAddTask(false)} />
-
-          <AddTaskBody tags={tags} colorTag={colorTag} tasks={tasks} setTasks={setTasks} />
-        </>
+            <AddTaskBody tags={tags} colorTag={colorTag} tasks={tasks} setTasks={setTasks} />
+          </>
         )
       }
     </div>
   )
 }
 
-export const CalendarWeek = ({ tags, colorTag, tasks, setTasks}) => {
+export const CalendarWeek = ({ tags, colorTag, tasks, setTasks }) => {
   const [showAddTask, setShowAddTask] = useState(false)
 
-  let todayDate = new Date()
-  let dayDate = todayDate.getDay()
-  let monthDate = todayDate.getMonth() + 1
-  let days = [...Array(7).keys()]
-  let daysName = ['Dom', 'Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab']
-  let hours = [...Array(19).keys()]
-  
+  const todayDate = new Date()
+  const dayDate = todayDate.getDay()
+  const monthDate = todayDate.getMonth() + 1
+  const days = [...Array(7).keys()]
+  const daysName = ['Dom', 'Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab']
+  const hours = [...Array(19).keys()]
+
   return (
-    <div style={{position: 'relative'}}>
+    <div style={{ position: 'relative' }}>
 
       <button className={styles.btnAddTask} onClick={() => setShowAddTask(true)}>
           +
@@ -74,9 +74,9 @@ export const CalendarWeek = ({ tags, colorTag, tasks, setTasks}) => {
                 return (
                   <td key={index}>
                     <div>{daysName[day]}</div>
-                    <span>{dayDate + '.'}{monthDate < 10 ? '0'+monthDate : monthDate}</span>
+                    <span>{dayDate + '.'}{monthDate < 10 ? '0' + monthDate : monthDate}</span>
                   </td>
-                )  
+                )
               })
             }
           </tr>
@@ -86,7 +86,7 @@ export const CalendarWeek = ({ tags, colorTag, tasks, setTasks}) => {
               hours.map((hour, index) => {
                 return (
                   <tr key={index} className={styles.hoursMonth}>
-                    <td>{hour + 6} {hour+6 <= 12 ? 'AM' : 'PM'}</td>
+                    <td>{hour + 6} {hour + 6 <= 12 ? 'AM' : 'PM'}</td>
                     <td></td>
                     <td></td>
                     <td></td>
@@ -95,7 +95,7 @@ export const CalendarWeek = ({ tags, colorTag, tasks, setTasks}) => {
                     <td></td>
                     <td></td>
                   </tr>
-                )   
+                )
               })
             }
         </tbody>
@@ -115,7 +115,7 @@ export const CalendarWeek = ({ tags, colorTag, tasks, setTasks}) => {
 
 export const CalendarMonth = () => {
   return (
-    <div style={{marginTop: '1.5rem', width: '100%'}}>
+    <div style={{ marginTop: '1.5rem', width: '100%' }}>
       <MiniCalendar/>
     </div>
   )
