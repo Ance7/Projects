@@ -49,7 +49,7 @@ export const CalendarDay = ({ tags, colorTag, tasks, setTasks }) => {
 }
 
 export const CalendarWeek = ({ tags, colorTag, tasks, setTasks}) => {
-  const [showAddTask, setShowAddTask] = useState(false);
+  const [showAddTask, setShowAddTask] = useState(false)
 
   let todayDate = new Date()
   let dayDate = todayDate.getDay()
