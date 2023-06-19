@@ -56,11 +56,13 @@ const AddTaskBody = ({ tags, colorTag, tasks, setTasks, setShowAddTask }) => {
 
   const createTask = (event) => {
     event.preventDefault()
+    const [year, month, day] = taskDate.split('-')
+    const date = new Date(year, month - 1, day)
     setTasks([...tasks, {
       name: taskName,
-      date: taskDate,
-      initHour: Number(initHour),
-      finishHour: Number(finishHour),
+      date: date,
+      initHour: initHour - 6,
+      finishHour: finishHour - 6,
       tag: tagSelect,
       repeat: taskRepeat,
       description: taskDescription
@@ -128,6 +130,7 @@ const AddTaskBody = ({ tags, colorTag, tasks, setTasks, setShowAddTask }) => {
 
         <button
           className={styles.btnCreateTask}
+          disabled={!taskName || !taskDate || !tagSelect || !taskDescription}
           onClick={ () => {
             // eslint-disable-next-line no-undef
             createTask(event)

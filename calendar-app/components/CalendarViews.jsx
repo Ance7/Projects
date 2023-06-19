@@ -3,11 +3,51 @@ import styles from '@/app/page.module.css'
 import { MiniCalendar } from './MiniCalendar'
 import YearCalendars from './YearCalendars'
 import AddTaskBody from './AddTaskBody'
+import showTask from './TaskView'
 
 export const CalendarDay = ({ tags, colorTag, tasks, setTasks }) => {
   const [showAddTask, setShowAddTask] = useState(false)
+  const selectedDate = new Date()
+  const filteredTasks = filterTasks(tasks, selectedDate)
 
   const hours = [...Array(19).keys()]
+
+  const showTasks = () => {
+    const taskView = []
+    let taskLeft
+
+    filteredTasks.forEach(task => {
+      const taskTop = task.initHour * 50
+      const taskHeight = (task.finishHour - task.initHour) * 50
+      const taskColor = colorTag[tags.indexOf(task.tag)]
+
+      const overlap = taskView.some(prevTask => {
+        return prevTask.props.style.top + prevTask.props.style.height > taskTop
+      })
+
+      if (overlap) {
+        taskLeft += 90
+      } else {
+        taskLeft = 50
+      }
+
+      taskView.push(
+        <div
+          className={styles.task}
+          onClick={() => showTask(task.name)}
+          style={{
+            top: taskTop,
+            height: taskHeight,
+            backgroundColor: taskColor,
+            left: taskLeft
+          }}>
+          <span>{task.name}</span>
+        </div>
+      )
+    })
+
+    return taskView
+  }
 
   return (
     <div style={{ position: 'relative' }}>
@@ -18,9 +58,9 @@ export const CalendarDay = ({ tags, colorTag, tasks, setTasks }) => {
       <table className={styles.dayCalendar}>
         <tbody>
           {
-            hours.map((hour, index) => {
+            hours.map((hour, i) => {
               return (
-                <tr key={index}>
+                <tr key={i}>
                   <td>{hour + 6}:00</td>
                   <td></td>
                   <td></td>
@@ -40,9 +80,12 @@ export const CalendarDay = ({ tags, colorTag, tasks, setTasks }) => {
           <>
             <div className={styles.addTaskOverlay} onClick={() => setShowAddTask(false)} />
 
-            <AddTaskBody tags={tags} colorTag={colorTag} tasks={tasks} setTasks={setTasks} />
+            <AddTaskBody tags={tags} colorTag={colorTag} tasks={tasks} setTasks={setTasks} setShowAddTask={setShowAddTask} />
           </>
         )
+      }
+      {
+        showTasks()
       }
     </div>
   )
@@ -151,4 +194,14 @@ export const CalendarYear = () => {
       <YearTable />
     </div>
   )
+}
+
+const filterTasks = (tasks, selectedDate) => {
+  return tasks.filter(task => {
+    const taskDate = task.date
+
+    return taskDate.getDate() === selectedDate.getDate() &&
+      taskDate.getMonth() === selectedDate.getMonth() &&
+      taskDate.getFullYear() === selectedDate.getFullYear()
+  })
 }

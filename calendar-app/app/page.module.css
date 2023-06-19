@@ -382,3 +382,11 @@
   border-radius: 15px;
   margin: 0.4rem;
 }
+
+.task {
+  position: absolute;
+  padding: 0.5rem;
+  border-radius: 15px;
+  color: #FFFFFF;
+  font-weight: bold;
+}
