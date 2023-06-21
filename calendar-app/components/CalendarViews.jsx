@@ -107,6 +107,10 @@ export const CalendarDay = ({ tags, colorTag, tasks, setTasks }) => {
 
 export const CalendarWeek = ({ tags, colorTag, tasks, setTasks }) => {
   const [showAddTask, setShowAddTask] = useState(false)
+  const [showTaskView, setShowTaskView] = useState(false)
+  const [actualTask, setActualTask] = useState('')
+  const filteredTasks = filterTasksByWeek(tasks)
+  console.log(filteredTasks)
 
   const todayDate = new Date()
   const dayDate = todayDate.getDay()
@@ -114,6 +118,53 @@ export const CalendarWeek = ({ tags, colorTag, tasks, setTasks }) => {
   const days = [...Array(7).keys()]
   const daysName = ['Dom', 'Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab']
   const hours = [...Array(19).keys()]
+
+  const showTasks = (day) => {
+    const taskView = []
+    let taskTopOffset = 0
+
+    filteredTasks
+      .filter(task => task.date.getDay() === day)
+      .forEach(task => {
+        const taskTop = (task.initHour + 1) * 56 + taskTopOffset
+        const taskHeight = (task.finishHour - task.initHour) * 56
+        const taskColor = colorTag[tags.indexOf(task.tag)]
+        const taskLeft = day === 0 ? 50 : 50 + day * 40
+
+        const overlap = taskView.some(prevTask => {
+          const prevTaskTop = prevTask.props.style.top
+          const prevTaskBottom = prevTaskTop + prevTask.props.style.height
+          return prevTaskBottom > taskTop
+        })
+
+        if (overlap) {
+          taskTopOffset += 20
+        } else {
+          taskTopOffset = 0
+        }
+
+        taskView.push(
+          <div
+            className={styles.task}
+            onClick={() => {
+              setShowTaskView(true)
+              setActualTask(task.name)
+            }}
+            style={{
+              top: taskTop,
+              height: taskHeight,
+              backgroundColor: taskColor,
+              left: taskLeft,
+              width: '3rem'
+            }}
+          >
+            <span>{task.name}</span>
+          </div>
+        )
+      })
+
+    return taskView
+  }
 
   return (
     <div style={{ position: 'relative' }}>
@@ -127,11 +178,14 @@ export const CalendarWeek = ({ tags, colorTag, tasks, setTasks }) => {
           <tr>
             <td></td>
             {
-              days.map((day, index) => {
+              days.map((day, i) => {
                 return (
-                  <td key={index}>
+                  <td key={i}>
                     <div>{daysName[day]}</div>
                     <span>{dayDate + '.'}{monthDate < 10 ? '0' + monthDate : monthDate}</span>
+                    {
+                      showTasks(day)
+                    }
                   </td>
                 )
               })
@@ -140,9 +194,9 @@ export const CalendarWeek = ({ tags, colorTag, tasks, setTasks }) => {
         </thead>
         <tbody>
             {
-              hours.map((hour, index) => {
+              hours.map((hour, i) => {
                 return (
-                  <tr key={index} className={styles.hoursMonth}>
+                  <tr key={i} className={styles.hoursMonth}>
                     <td>{hour + 6} {hour + 6 <= 12 ? 'AM' : 'PM'}</td>
                     <td></td>
                     <td></td>
@@ -158,14 +212,15 @@ export const CalendarWeek = ({ tags, colorTag, tasks, setTasks }) => {
         </tbody>
       </table>
 
-      {showAddTask && (
+      {
+        showAddTask && (
         <>
           <div className={styles.addTaskOverlay} onClick={() => setShowAddTask(false)} />
 
           <AddTaskBody tags={tags} colorTag={colorTag} tasks={tasks} setTasks={setTasks} setShowAddTask={setShowAddTask} />
         </>
-      )
-    }
+        )
+     }
     </div>
   )
 }
@@ -217,5 +272,20 @@ const filterTasks = (tasks, selectedDate) => {
     return taskDate.getDate() === selectedDate.getDate() &&
       taskDate.getMonth() === selectedDate.getMonth() &&
       taskDate.getFullYear() === selectedDate.getFullYear()
+  })
+}
+
+const filterTasksByWeek = (tasks) => {
+  const currentDate = new Date()
+  currentDate.setHours(0, 0, 0, 0)
+  const firstDayWeek = currentDate.getDate() - currentDate.getDay()
+  const firstDateWeek = new Date(currentDate)
+  firstDateWeek.setDate(firstDayWeek)
+  const lastDateWeek = new Date(currentDate)
+  lastDateWeek.setDate(firstDayWeek + 6)
+
+  return tasks.filter(task => {
+    const taskDate = task.date
+    return taskDate.getTime() >= firstDateWeek.getTime() && taskDate.getTime() <= lastDateWeek.getTime()
   })
 }

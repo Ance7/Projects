@@ -15,15 +15,15 @@ export default function RootLayout ({ children }) {
     {
       name: 'Tarea 1',
       date: new Date(2023, 5, 21),
-      initHour: 2,
-      finishHour: 4,
+      initHour: 1,
+      finishHour: 6,
       tag: 'Trabajo',
       repeat: 'Todas las semanas',
       description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.'
     },
     {
       name: 'Tarea 2',
-      date: new Date(2023, 5, 21),
+      date: new Date(2023, 5, 22),
       initHour: 6,
       finishHour: 8,
       tag: 'Personal',
@@ -32,7 +32,7 @@ export default function RootLayout ({ children }) {
     },
     {
       name: 'Tarea 3',
-      date: new Date(2023, 5, 21),
+      date: new Date(2023, 5, 19),
       initHour: 3,
       finishHour: 12,
       tag: 'Urgente',
@@ -41,7 +41,7 @@ export default function RootLayout ({ children }) {
     },
     {
       name: 'Tarea 4',
-      date: new Date(2023, 5, 21),
+      date: new Date(2023, 5, 24),
       initHour: 10,
       finishHour: 12,
       tag: 'Trabajo',
@@ -50,7 +50,7 @@ export default function RootLayout ({ children }) {
     },
     {
       name: 'Tarea 5',
-      date: new Date(2023, 5, 21),
+      date: new Date(2023, 5, 18),
       initHour: 14,
       finishHour: 16,
       tag: 'Personal',
