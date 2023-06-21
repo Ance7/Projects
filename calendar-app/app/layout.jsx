@@ -14,42 +14,47 @@ export default function RootLayout ({ children }) {
   const [tasks, setTasks] = useState([
     {
       name: 'Tarea 1',
-      date: new Date(2023, 5, 19),
+      date: new Date(2023, 5, 21),
       initHour: 2,
       finishHour: 4,
       tag: 'Trabajo',
+      repeat: 'Todas las semanas',
       description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.'
     },
     {
       name: 'Tarea 2',
-      date: new Date(2023, 5, 19),
+      date: new Date(2023, 5, 21),
       initHour: 6,
       finishHour: 8,
       tag: 'Personal',
+      repeat: 'Cada dia',
       description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.'
     },
     {
       name: 'Tarea 3',
-      date: new Date(2023, 5, 19),
+      date: new Date(2023, 5, 21),
       initHour: 3,
       finishHour: 12,
       tag: 'Urgente',
+      repeat: 'Cada mes',
       description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.'
     },
     {
       name: 'Tarea 4',
-      date: new Date(2023, 5, 19),
+      date: new Date(2023, 5, 21),
       initHour: 10,
       finishHour: 12,
       tag: 'Trabajo',
+      repeat: 'Cada semana',
       description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.'
     },
     {
       name: 'Tarea 5',
-      date: new Date(2023, 5, 19),
+      date: new Date(2023, 5, 21),
       initHour: 14,
       finishHour: 16,
       tag: 'Personal',
+      repeat: 'Un dia',
       description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.'
     }
   ])

@@ -188,6 +188,7 @@
   height: 2.5rem;
   align-items: center;
   width: 2.45rem;
+  cursor: auto;
 }
 
 .dayCalendar td:hover {
@@ -389,4 +390,71 @@
   border-radius: 15px;
   color: #FFFFFF;
   font-weight: bold;
+  cursor: pointer;
+}
+
+.taskOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 9;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.taskContainer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
+  background-color: #28262B;
+  padding: 2rem 2rem 2rem;
+  border-radius: 15px 15px 0 0;
+  display: flex;
+  flex-direction: column;
+  font-size: 1.1rem;
+  color: #FFFFFF;
+  gap: 1rem;
+}
+
+.taskContainer h3 {
+  font-size: 1.7rem;
+  color: #B68D40;
+  margin: 0 0 0.9rem 0;
+}
+
+.taskContainer p, .taskContainer div {
+  margin: 0;
+}
+
+.btnEditTask {
+  background-color: #B68D40;
+  border-radius: 15px;
+  border: none;
+  color: white;
+  font-size: 1.4rem;
+  font-weight: bold;
+  width: 10rem;
+  height: 2.7rem;
+}
+
+.btnDeleteTask {
+  background-color: #4d4d4d;
+  border-radius: 15px;
+  border: none;
+  color: white;
+  font-size: 1.4rem;
+  font-weight: bold;
+  width: 10rem;
+  height: 2.7rem;
+}
+
+.taskBtnContainer {
+  display: flex;
+  gap: 1rem;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;  
 }

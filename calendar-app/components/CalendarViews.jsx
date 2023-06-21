@@ -3,10 +3,12 @@ import styles from '@/app/page.module.css'
 import { MiniCalendar } from './MiniCalendar'
 import YearCalendars from './YearCalendars'
 import AddTaskBody from './AddTaskBody'
-import showTask from './TaskView'
+import TaskView from './TaskView'
 
 export const CalendarDay = ({ tags, colorTag, tasks, setTasks }) => {
   const [showAddTask, setShowAddTask] = useState(false)
+  const [showTaskView, setShowTaskView] = useState(false)
+  const [actualTask, setActualTask] = useState('')
   const selectedDate = new Date()
   const filteredTasks = filterTasks(tasks, selectedDate)
 
@@ -34,7 +36,10 @@ export const CalendarDay = ({ tags, colorTag, tasks, setTasks }) => {
       taskView.push(
         <div
           className={styles.task}
-          onClick={() => showTask(task.name)}
+          onClick={() => {
+            setShowTaskView(true)
+            setActualTask(task.name)
+          }}
           style={{
             top: taskTop,
             height: taskHeight,
@@ -86,6 +91,15 @@ export const CalendarDay = ({ tags, colorTag, tasks, setTasks }) => {
       }
       {
         showTasks()
+      }
+      {
+        showTaskView && (
+          <>
+            <div className={styles.taskOverlay} onClick={() => setShowTaskView(false)}></div>
+
+            <TaskView taskName={actualTask} tasks={tasks} tags={tags} colorTags={colorTag} />
+          </>
+        )
       }
     </div>
   )

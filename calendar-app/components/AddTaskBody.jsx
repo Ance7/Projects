@@ -115,10 +115,10 @@ const AddTaskBody = ({ tags, colorTag, tasks, setTasks, setShowAddTask }) => {
         <div>
           <label>Repetir</label>
           <select onChange={handleChangeRepeat}>
-            <option value="everyDays">Todos los dias</option>
-            <option value="oneDay">Solo un dia</option>
-            <option value="everyWeek">Cada semana</option>
-            <option value="everyMonth">Cada mes</option>
+            <option value="Cada dia">Todos los dias</option>
+            <option value="Un Dia">Solo un dia</option>
+            <option value="Cada semana">Cada semana</option>
+            <option value="Cada mes">Cada mes</option>
           </select>
         </div>
         <div>
