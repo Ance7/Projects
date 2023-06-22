@@ -110,6 +110,7 @@ export const CalendarWeek = ({ tags, colorTag, tasks, setTasks }) => {
   const [showTaskView, setShowTaskView] = useState(false)
   const [actualTask, setActualTask] = useState('')
   const filteredTasks = filterTasksByWeek(tasks)
+  console.log(filteredTasks)
 
   const todayDate = new Date()
   const dayDate = todayDate.getDay()
@@ -125,10 +126,11 @@ export const CalendarWeek = ({ tags, colorTag, tasks, setTasks }) => {
     filteredTasks
       .filter(task => task.date.getDay() === day)
       .forEach(task => {
-        const taskTop = (task.initHour + 1) * 50 + taskTopOffset
-        const taskHeight = (task.finishHour - task.initHour + 1) * 50
+        const taskTop = (task.initHour + 1) * 56 + taskTopOffset
+        const taskHeight = (task.finishHour - task.initHour) * 56
         const taskColor = colorTag[tags.indexOf(task.tag)]
         const taskLeft = day === 0 ? 50 : 50 + day * 40
+
         const overlap = taskView.some(prevTask => {
           const prevTaskTop = prevTask.props.style.top
           const prevTaskBottom = prevTaskTop + prevTask.props.style.height
@@ -218,26 +220,15 @@ export const CalendarWeek = ({ tags, colorTag, tasks, setTasks }) => {
           <AddTaskBody tags={tags} colorTag={colorTag} tasks={tasks} setTasks={setTasks} setShowAddTask={setShowAddTask} />
         </>
         )
-      }
-      {
-        showTaskView && (
-          <>
-            <div className={styles.addTaskOverlay} onClick={() => setShowTaskView(false)}></div>
-
-            <TaskView taskName={actualTask} tasks={tasks} tags={tags} colorTags={colorTag} />
-          </>
-        )
-      }
+     }
     </div>
   )
 }
 
-export const CalendarMonth = ({ tasks }) => {
-  const taskFilter = filterTasksByMonth(tasks)
-
+export const CalendarMonth = () => {
   return (
     <div style={{ marginTop: '1.5rem', width: '100%' }}>
-      <MiniCalendar />
+      <MiniCalendar/>
     </div>
   )
 }
@@ -295,18 +286,6 @@ const filterTasksByWeek = (tasks) => {
 
   return tasks.filter(task => {
     const taskDate = task.date
-    return taskDate >= firstDateWeek && taskDate <= lastDateWeek
-  })
-}
-
-const filterTasksByMonth = (tasks) => {
-  const currentDate = new Date()
-  currentDate.setHours(0, 0, 0, 0)
-  const firstDayMonth = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1)
-  const lastDayMonth = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0)
-
-  return tasks.filter(task => {
-    const taskDate = task.date
-    return taskDate >= firstDayMonth && taskDate <= lastDayMonth
+    return taskDate.getTime() >= firstDateWeek.getTime() && taskDate.getTime() <= lastDateWeek.getTime()
   })
 }

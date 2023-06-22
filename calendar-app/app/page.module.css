@@ -155,20 +155,18 @@
   color: #FFFFFF;
   border-radius: 10px;
   margin-top: 1.5rem;
-  padding: 0rem 0.6rem 1.5rem 0.6rem;
+  padding: 1rem 0.6rem;
 }
 
 .monthCalendar td {
   font-size: 0.8rem;
   cursor: auto;
   width: 2.45rem;
-  height: 3.05rem;
-  font-weight: bold;
 }
 
 .hoursMonth td{
   border-bottom: #FFFFFF 1px solid;
-  font-size: 0.7rem;
+  font-size: 0.6rem;
 }
 
 .monthCalendar td:hover {
