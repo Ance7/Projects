@@ -2,11 +2,11 @@
 
 import './globals.css'
 import { rubik } from './fonts'
-import HeaderComponent from '@/components/SearchTask'
 import Calendar from '@/components/Calendar'
 import { MiniCalendar } from '@/components/MiniCalendar'
 import TagsView from '@/components/TagsView'
 import { useState } from 'react'
+import SearchTask from '@/components/SearchTask'
 
 export default function RootLayout ({ children }) {
   const [tags, setTags] = useState(['Trabajo', 'Personal', 'Urgente'])
@@ -51,8 +51,8 @@ export default function RootLayout ({ children }) {
     {
       name: 'Tarea 5',
       date: new Date(2023, 5, 18),
-      initHour: 14,
-      finishHour: 16,
+      initHour: 12,
+      finishHour: 18,
       tag: 'Personal',
       repeat: 'Un dia',
       description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.'
@@ -63,7 +63,7 @@ export default function RootLayout ({ children }) {
     <html lang="en">
       <body className={rubik.className}>
 
-        <HeaderComponent />
+        <SearchTask tasks={tasks} tags={tags} colorTags={colorTag} />
 
         <main>
           <div className='calendar-container'>

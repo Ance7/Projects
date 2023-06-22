@@ -16,7 +16,7 @@ function Calendar ({ tags, colorTag, tasks, setTasks }) {
     } else if (optDate === 'week') {
       return <CalendarWeek tags={tags} colorTag={colorTag} tasks={tasks} setTasks={setTasks} />
     } else if (optDate === 'month') {
-      return <CalendarMonth />
+      return <CalendarMonth tasks={tasks}/>
     } else if (optDate === 'year') {
       return <CalendarYear />
     }

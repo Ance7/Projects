@@ -51,10 +51,16 @@ header {
   font-size: 1rem;
   color: #ffffff;
   padding: 0 0 0 1rem;
+  width: 95%;
 }
 
-.calendar-options input:focus {
-  outline: none;
+.calendar-search [type="search"]:active {
+  background-color: transparent;
+}
+
+.calendar-options [type="search"]:focus {
+ outline: none;
+ background-color: transparent;
 }
 
 .calendar-options input::placeholder {
@@ -147,4 +153,36 @@ td {
 td:hover {
   background-color: #a9a29c5b;
   border-radius: 50%;
+}
+
+.task-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index:9;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.task-not-found {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: var(--dark);
+  border-radius: 15px;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #A9A29C;
+  width: 20rem;
+  z-index: 10;
+  text-align: center;
+}
+
+.task-not-found h3 {
+  font-size: 1.5rem;
+  margin: 1rem 0 0;
 }
