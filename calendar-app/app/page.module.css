@@ -159,7 +159,7 @@
 }
 
 .monthCalendar td {
-  font-size: 0.8rem;
+  font-size: 0.7rem;
   cursor: auto;
   width: 2.45rem;
   height: 3.05rem;
@@ -168,7 +168,6 @@
 
 .hoursMonth td{
   border-bottom: #FFFFFF 1px solid;
-  font-size: 0.7rem;
 }
 
 .monthCalendar td:hover {
@@ -292,7 +291,7 @@
 
 .addTaskBody textarea {
   max-height: 5rem;
-  min-height: 3rem;
+  min-height: 4.5rem;
   min-width: 12rem;
   max-width: 12rem;
   border: none;
@@ -393,6 +392,7 @@
   color: #FFFFFF;
   font-weight: bold;
   cursor: pointer;
+  border: 1px solid #4d4d4d;
 }
 
 .taskOverlay {
@@ -440,6 +440,7 @@
   font-weight: bold;
   width: 10rem;
   height: 2.7rem;
+  cursor: pointer;
 }
 
 .btnDeleteTask {
@@ -451,6 +452,7 @@
   font-weight: bold;
   width: 10rem;
   height: 2.7rem;
+  cursor: pointer;
 }
 
 .taskBtnContainer {
@@ -459,4 +461,23 @@
   width: 100%;
   justify-content: space-between;
   align-items: center;  
+}
+
+.editTaskContainer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
+  background-color: #28262B;
+  padding: 1rem 2rem 2rem;
+}
+
+.editTaskTaskName {
+  margin: 0;
+  width: 12rem;
+  background-color: #d6ad6056;
+  border-radius: 5px;
+  padding: 0.4rem 0.4rem;
+  cursor: not-allowed;
 }

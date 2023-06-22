@@ -4,6 +4,7 @@ import { MiniCalendar } from './MiniCalendar'
 import YearCalendars from './YearCalendars'
 import AddTaskBody from './AddTaskBody'
 import TaskView from './TaskView'
+import EditTaskBody from './EditTaskBody'
 
 export const CalendarDay = ({ tags, colorTag, tasks, setTasks }) => {
   const [showAddTask, setShowAddTask] = useState(false)
@@ -108,6 +109,8 @@ export const CalendarDay = ({ tags, colorTag, tasks, setTasks }) => {
 export const CalendarWeek = ({ tags, colorTag, tasks, setTasks }) => {
   const [showAddTask, setShowAddTask] = useState(false)
   const [showTaskView, setShowTaskView] = useState(false)
+  const [ShowEditTasks, setShowEditTasks] = useState(false)
+  const [taskForEdit, setTaskForEdit] = useState('')
   const [actualTask, setActualTask] = useState('')
   const filteredTasks = filterTasksByWeek(tasks)
 
@@ -117,18 +120,20 @@ export const CalendarWeek = ({ tags, colorTag, tasks, setTasks }) => {
   const days = [...Array(7).keys()]
   const daysName = ['Dom', 'Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab']
   const hours = [...Array(19).keys()]
+  const firstDayWeek = new Date(todayDate.setDate(todayDate.getDate() - todayDate.getDay()))
 
   const showTasks = (day) => {
     const taskView = []
-    let taskTopOffset = 0
+    let taskLeftOffset = 0
 
     filteredTasks
       .filter(task => task.date.getDay() === day)
       .forEach(task => {
-        const taskTop = (task.initHour + 1) * 50 + taskTopOffset
+        const taskTop = (task.initHour + 1) * 50
         const taskHeight = (task.finishHour - task.initHour + 1) * 50
         const taskColor = colorTag[tags.indexOf(task.tag)]
         const taskLeft = day === 0 ? 50 : 50 + day * 40
+        let taskOverlap = false
         const overlap = taskView.some(prevTask => {
           const prevTaskTop = prevTask.props.style.top
           const prevTaskBottom = prevTaskTop + prevTask.props.style.height
@@ -136,9 +141,11 @@ export const CalendarWeek = ({ tags, colorTag, tasks, setTasks }) => {
         })
 
         if (overlap) {
-          taskTopOffset += 20
+          taskLeftOffset += 5
+          taskOverlap = true
         } else {
-          taskTopOffset = 0
+          taskLeftOffset = 0
+          taskOverlap = false
         }
 
         taskView.push(
@@ -152,8 +159,11 @@ export const CalendarWeek = ({ tags, colorTag, tasks, setTasks }) => {
               top: taskTop,
               height: taskHeight,
               backgroundColor: taskColor,
-              left: taskLeft,
-              width: '3rem'
+              left: taskLeft + taskLeftOffset,
+              width: '3rem',
+              opacity: taskOverlap ? 0.6 : 1,
+              overflow: 'hidden',
+              writingMode: 'vertical-rl'
             }}
           >
             <span>{task.name}</span>
@@ -177,10 +187,13 @@ export const CalendarWeek = ({ tags, colorTag, tasks, setTasks }) => {
             <td></td>
             {
               days.map((day, i) => {
+                const dayDate = firstDayWeek.getDate() + i
+                const monthDate = firstDayWeek.getMonth() + 1
+
                 return (
                   <td key={i}>
                     <div>{daysName[day]}</div>
-                    <span>{dayDate + '.'}{monthDate < 10 ? '0' + monthDate : monthDate}</span>
+                    <span>{dayDate}.{monthDate < 10 ? '0' + monthDate : monthDate}</span>
                     {
                       showTasks(day)
                     }
@@ -224,7 +237,16 @@ export const CalendarWeek = ({ tags, colorTag, tasks, setTasks }) => {
           <>
             <div className={styles.addTaskOverlay} onClick={() => setShowTaskView(false)}></div>
 
-            <TaskView taskName={actualTask} tasks={tasks} tags={tags} colorTags={colorTag} />
+            <TaskView taskName={actualTask} tasks={tasks} tags={tags} colorTags={colorTag} setTasks={setTasks} setShowTaskView={setShowTaskView} setShowEditTasks={setShowEditTasks} setTaskForEdit={setTaskForEdit} />
+          </>
+        )
+      }
+      {
+        ShowEditTasks && (
+          <>
+            <div className={styles.addTaskOverlay} onClick={() => setShowEditTasks(false)}></div>
+
+            <EditTaskBody task={taskForEdit} colorTag={colorTag} setTasks={setTasks} tasks={tasks} setShowEditTasks={setShowEditTasks} setTaskForEdit={setTaskForEdit} tags={tags} />
           </>
         )
       }

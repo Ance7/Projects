@@ -4,24 +4,29 @@ import React, { useState } from 'react'
 import styles from '@/app/page.module.css'
 import { miniArrowLeft, miniArrowRight } from '@/app/icons'
 
-const AddTaskBody = ({ tags, colorTag, tasks, setTasks, setShowAddTask }) => {
-  const [initHour, setInitHour] = useState(8)
-  const [finishHour, setFinishHour] = useState(15)
+const EditTaskBody = ({ task, colorTag, setTasks, tasks, setShowEditTasks, setTaskForEdit, tags }) => {
+  const [initHour, setInitHour] = useState(task.initHour + 6)
+  const [finishHour, setFinishHour] = useState(task.finishHour + 6)
+  const [taskDate, setTaskDate] = useState(task.date)
+  const [taskRepeat, setTaskRepeat] = useState(task.repeat)
+  const [taskDescription, setTaskDescription] = useState(task.description)
+  const colorTagTask = colorTag[tags.indexOf(task.tag)]
 
-  const [tagSelect, setTagSelect] = useState('')
-
-  const [taskName, setTaskName] = useState('')
-  const [taskDate, setTaskDate] = useState('')
-  const [taskRepeat, setTaskRepeat] = useState('')
-  const [taskDescription, setTaskDescription] = useState('')
+  const formatDate = (date) => {
+    const actualDate = new Date(date)
+    const year = actualDate.getFullYear()
+    const month = actualDate.getMonth() + 1
+    const day = actualDate.getDate()
+    return `${year}-${month < 10 ? '0' + month : month}-${day < 10 ? '0' + day : day}`
+  }
 
   const handleInitHour = (ope) => {
     if (ope === 'inc') {
-      if (initHour === 22) return
+      if (initHour === 23) return
       if (initHour === finishHour - 1) return
       setInitHour(initHour + 1)
     } else if (ope === 'dec') {
-      if (initHour === 5) return
+      if (initHour === 6) return
       setInitHour(initHour - 1)
     }
   }
@@ -36,14 +41,6 @@ const AddTaskBody = ({ tags, colorTag, tasks, setTasks, setShowAddTask }) => {
     }
   }
 
-  const handleSelectTag = (tag) => {
-    setTagSelect(tag)
-  }
-
-  const handleChangeName = (e) => {
-    setTaskName(e.target.value)
-  }
-
   const handleChangeDate = (e) => {
     setTaskDate(e.target.value)
   }
@@ -56,35 +53,44 @@ const AddTaskBody = ({ tags, colorTag, tasks, setTasks, setShowAddTask }) => {
     setTaskDescription(e.target.value)
   }
 
-  const createTask = (event) => {
+  const editTask = (event) => {
     event.preventDefault()
-    const [year, month, day] = taskDate.split('-')
-    const date = new Date(year, month - 1, day)
-    const newTask = {
-      name: taskName,
+    let date
+    if (taskDate === task.date) {
+      const [year, month, day] = formatDate(task.date).split('-')
+      date = new Date(year, month - 1, day)
+    } else {
+      const [year, month, day] = taskDate.split('-')
+      date = new Date(year, month - 1, day)
+    }
+
+    tasks.splice(tasks.indexOf(task), 1)
+
+    setTasks([...tasks, {
+      name: task.name,
+      // eslint-disable-next-line object-shorthand
       date: date,
       initHour: initHour - 6,
       finishHour: finishHour - 6,
-      tag: tagSelect,
+      tag: task.tag,
       repeat: taskRepeat,
       description: taskDescription
-    }
-    setTasks([...tasks, newTask])
+    }])
 
-    localStorage.setItem('tasks', JSON.stringify([...tasks, newTask]))
+    setTaskForEdit('')
   }
 
   return (
-    <div className={styles.addTaskContainer}>
-      <h3 style={{ fontSize: '1.7rem', color: '#B68D40' }}>Crea un evento</h3>
+    <div className={styles.editTaskContainer}>
+      <h3 style={{ fontSize: '1.7rem', color: '#B68D40' }}>Edita un evento</h3>
       <form className={styles.addTaskBody}>
         <div>
           <label>Nombre</label>
-          <input type="text" placeholder='Ingresa el nombre' maxLength={10} onChange={handleChangeName}/>
+          <p className={styles.editTaskTaskName}>{task.name}</p>
         </div>
         <div>
           <label>Fecha</label>
-          <input type="date" onChange={handleChangeDate}/>
+          <input type="date" onChange={handleChangeDate} defaultValue={formatDate(task.date)} />
         </div>
         <div>
           <label>Hora</label>
@@ -105,21 +111,13 @@ const AddTaskBody = ({ tags, colorTag, tasks, setTasks, setShowAddTask }) => {
           <label>Tag</label>
           <div className={styles.addTaskBodyTagsContainer}>
             {
-              tags.map((tag, index) => {
-                return (
-                  <div key={index}>
-                    <p style={{ backgroundColor: colorTag[index] }} className={tagSelect === tag ? styles.tagActive : styles.addTaskBodyTags} onClick={() => { handleSelectTag(tag) }}>
-                      {tag}
-                    </p>
-                  </div>
-                )
-              })
+              <p style={{ backgroundColor: colorTagTask, padding: '0.3rem 1.5rem', borderRadius: '15px', margin: 0, cursor: 'not-allowed' }}>{task.tag}</p>
             }
           </div>
         </div>
         <div>
           <label>Repetir</label>
-          <select onChange={handleChangeRepeat}>
+          <select onChange={handleChangeRepeat} defaultValue={task.repeat}>
             <option value="Cada dia">Todos los dias</option>
             <option value="Un Dia">Solo un dia</option>
             <option value="Cada semana">Cada semana</option>
@@ -128,24 +126,24 @@ const AddTaskBody = ({ tags, colorTag, tasks, setTasks, setShowAddTask }) => {
         </div>
         <div>
           <label>Descripcion</label>
-          <textarea type="text" placeholder='Ingresa la descripcion' maxLength={50} onChange={handleChangeDescription}/>
+          <textarea type="text" placeholder='Ingresa la descripcion' maxLength={50} onChange={handleChangeDescription} defaultValue={task.description} />
         </div>
 
         <div className={styles.addTaskLine} />
 
         <button
           className={styles.btnCreateTask}
-          disabled={!taskName || !taskDate || !tagSelect || !taskDescription}
           onClick={ () => {
             // eslint-disable-next-line no-undef
-            createTask(event)
-            setShowAddTask(false)
+            editTask(event)
+            setShowEditTasks(false)
+            setTaskForEdit(task)
           }}>
-            Crear
+            Editar
           </button>
       </form>
     </div>
   )
 }
 
-export default AddTaskBody
+export default EditTaskBody

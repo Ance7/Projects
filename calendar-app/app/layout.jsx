@@ -5,59 +5,25 @@ import { rubik } from './fonts'
 import Calendar from '@/components/Calendar'
 import { MiniCalendar } from '@/components/MiniCalendar'
 import TagsView from '@/components/TagsView'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import SearchTask from '@/components/SearchTask'
 
 export default function RootLayout ({ children }) {
   const [tags, setTags] = useState(['Trabajo', 'Personal', 'Urgente'])
   const [colorTag, setColorTag] = useState(['#00b8d8', '#ff7cb3', '#00a772'])
-  const [tasks, setTasks] = useState([
-    {
-      name: 'Tarea 1',
-      date: new Date(2023, 5, 21),
-      initHour: 1,
-      finishHour: 6,
-      tag: 'Trabajo',
-      repeat: 'Todas las semanas',
-      description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.'
-    },
-    {
-      name: 'Tarea 2',
-      date: new Date(2023, 5, 22),
-      initHour: 6,
-      finishHour: 8,
-      tag: 'Personal',
-      repeat: 'Cada dia',
-      description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.'
-    },
-    {
-      name: 'Tarea 3',
-      date: new Date(2023, 5, 19),
-      initHour: 3,
-      finishHour: 12,
-      tag: 'Urgente',
-      repeat: 'Cada mes',
-      description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.'
-    },
-    {
-      name: 'Tarea 4',
-      date: new Date(2023, 5, 24),
-      initHour: 10,
-      finishHour: 12,
-      tag: 'Trabajo',
-      repeat: 'Cada semana',
-      description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.'
-    },
-    {
-      name: 'Tarea 5',
-      date: new Date(2023, 5, 18),
-      initHour: 12,
-      finishHour: 18,
-      tag: 'Personal',
-      repeat: 'Un dia',
-      description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.'
+  const [tasks, setTasks] = useState([])
+
+  useEffect(() => {
+    // eslint-disable-next-line no-undef
+    const tasks = JSON.parse(localStorage.getItem('tasks'))
+    if (tasks) {
+      setTasks(tasks.map(task => ({
+        ...task,
+        date: new Date(task.date)
+      })))
     }
-  ])
+    console.log(tasks)
+  }, [])
 
   return (
     <html lang="en">
