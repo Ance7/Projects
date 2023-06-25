@@ -1,0 +1,161 @@
+@import url('https://fonts.googleapis.com/css2?family=Overpass:wght@400;700&display=swap');
+/* font-family: 'Overpass', sans-serif;         15px */
+:root {
+     /* Primary */
+    --orange: hsl(25, 97%, 53%);
+
+    /* Neutral */
+    --white: hsl(0, 0%, 100%);
+    --light-grey: hsl(217, 12%, 63%);
+    --medium-grey: hsl(216, 12%, 54%);
+    --dark-blue: hsl(213, 19%, 18%);
+    --very-dark-blue: hsl(216, 12%, 8%);
+}
+
+* {
+    box-sizing: border-box;
+    font-family: 'Overpass', sans-serif;
+}
+
+body {
+    background-color: var(--very-dark-blue);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.container {
+    background-color: var(--dark-blue);
+    width: 27rem;
+    height: 27rem;
+    border-radius: 1.5rem;
+    padding: 2rem;
+}
+
+.star {
+    background-color: #2a3441;
+    border-radius: 50%;
+    width: 3rem;
+    height: 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 2rem;
+}
+
+#title {
+    color: var(--white);
+    margin: 0;
+}
+
+#text {
+    color: var(--light-grey);
+    font-size: 16px;
+}
+
+.points {
+    display: flex;
+    color: var(--medium-grey);
+    justify-content: space-between;
+    align-items: center;
+}
+
+.point {
+    background-color: #2a3441;
+    border-radius: 50%;
+    width: 3.5rem;
+    height: 3.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    margin: 1rem 0 2.5rem 0;
+    transition: all 0.1s;
+    cursor: pointer;
+}
+
+.submit {
+    background-color: var(--orange);
+    border: none;
+    border-radius: 2rem;
+    width: 100%;
+    height: 3rem;
+    letter-spacing: 3px;
+    font-size: 17px;
+    transition: all 0.2s;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--white);
+}
+
+a {
+    text-decoration: none;
+}  
+
+.submit:hover {
+    color: var(--orange);
+    background-color: var(--white);
+}
+
+.point:hover {
+    background-color: var(--medium-grey);
+    color: white;
+}
+
+.point-selected {
+    background-color: var(--orange);
+    color: var(--white);
+    width: 3.7rem;
+    height: 3.7rem;
+    font-size: 19px;
+}
+
+.point-selected:hover {
+    background-color: hsla(25, 96%, 52%, 0.822);
+}
+
+
+.container-thanku {
+    background-color: var(--dark-blue);
+    width: 27rem;
+    height: 27rem;
+    border-radius: 1.5rem;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.selected {
+    background-color: #2a3441;
+    color: var(--orange);
+    border-radius: 1rem;
+    width: 12rem;
+    height: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 2rem 0 2rem 0;
+}
+
+
+.text-thanku {
+    color: var(--white);
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+    font-size: 15px;
+    margin: 0;
+}
+
+.text-thanku p {
+    color: var(--medium-grey);
+    margin: 0;
+}

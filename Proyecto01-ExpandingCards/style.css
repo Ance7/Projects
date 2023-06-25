@@ -1,0 +1,78 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    overflow: hidden;
+    margin: 0;
+}
+
+.container {
+    display: flex;
+    width: 90vw;
+    align-items: center;
+}
+
+.img1 {
+    background-image: url(Img/Naturaleza1.jpg);
+}
+.img2 {
+    background-image: url(Img/Naturaleza2.jpg);
+}
+.img3 {
+    background-image: url(Img/Naturaleza3.jpg);
+}
+.img4 {
+    background-image: url(Img/Naturaleza4.jpg);
+}
+.img5 {
+    background-image: url(Img/Naturaleza5.jpg);
+}
+
+.panel {
+    background-image: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 70vh;
+    border-radius: 1.2rem;
+    background-size: cover;
+    flex: 0.5;
+    position: relative;
+    margin: 0.3rem;
+    color: #fff;
+    transition: all 0.7s ease-in;
+}
+
+.panel.active {
+    flex: 5;
+    height: 80vh;
+}
+
+.panel h3 {
+    font-size: 2rem;
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    margin: 0;
+    opacity: 0;
+}
+
+.panel.active h3 {
+    opacity: 1;
+    transition: opacity 0.3s ease-in 0.4s;
+}
+
+@media (max-width: 480px) {
+    .container {
+        width: 100vw;
+    }
+
+    .panel:nth-last-of-type(4),
+    .panel:nth-last-of-type(5) {
+        display: none;
+    }
+}
